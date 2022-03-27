@@ -4,16 +4,22 @@ from django.conf import settings
 
 # Create your models here.
 class Pokemon(models.Model):
-    id = models.UUIDField(
+    id = models.CharField(
+        max_length=4,
         primary_key=True,
-        default=uuid.uuid4,
         editable=False,
         verbose_name="National Pokdex Number."
     )
-
     name = models.CharField(max_length=15, verbose_name="Name of Pokemon.")
-    generation = models.IntegerChoices('generation', '1 2 3 4 5 6 7 8 9')
-    img = models.ImageField(null=True, verbose_name="Image of the Pokemon.")
+    generation = models.PositiveIntegerField(default=1, verbose_name="Generation Number")
+
+    @classmethod
+    def create(cls, name: str, number: str, generation: int):
+        pokemon = cls(id=number, name=name, generation=generation)
+        return pokemon
+    
+    def __str__(self) -> str:
+        return f"Pokemon: {self.name}, Number: {self.id}, Generation: {self.generation}"
 
 class Record(models.Model):
     id = models.BigAutoField(primary_key=True)

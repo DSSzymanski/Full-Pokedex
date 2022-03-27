@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pokedex.apps.PokedexConfig',
+    'pokedex_api.apps.PokedexConfig',
     'rest_framework',
 ]
 
