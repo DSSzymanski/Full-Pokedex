@@ -29,3 +29,15 @@ def pokemonDetail(request, pk):
     pokemon = Pokemon.objects.get(id=pk)
     serializer = PokemonSerializer(pokemon, many=False)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def recordList(request):
+    record = Record.objects.all()
+    serializer = RecordSerializer(record, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def userRecordList(request, owner):
+    record = Record.objects.filter(owner=owner)
+    serializer = RecordSerializer(record, many=True)
+    return Response(serializer.data)
