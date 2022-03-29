@@ -9,4 +9,5 @@ class PokemonSerializer(serializers.ModelSerializer):
 class RecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Record
-        fields = "__all__"
+        exclude = ['owner']
+        depth = 1
