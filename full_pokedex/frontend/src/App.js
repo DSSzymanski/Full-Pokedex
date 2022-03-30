@@ -6,26 +6,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       pokemonList: [],
-      recordList: []
+      recordList: [],
+      numGens: 0,
     }
-    this.getData = this.getData.bind(this)
   };
 
-  componentDidMount() {
-    this.getData()
-  }
-
-  getData() {
-    fetch('http://127.0.0.1:8000/api/pokemon-list')
+  async componentDidMount() {
+    await fetch('http://127.0.0.1:8000/api/pokemon-list')
       .then(response => response.json())
       .then(data =>
         this.setState({pokemonList : data})
       )
+    this.setState({numGens: this.state.pokemonList.at(-1).generation})
   }
 
   render(){
     var pokemon = this.state.pokemonList
-    pokemon = pokemon.filter(poke => poke.generation === 1)
+    var numGens = this.state.numGens
     return(
       <div className="container">
         {pokemon.map((poke, index) => {
