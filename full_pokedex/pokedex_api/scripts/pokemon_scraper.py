@@ -45,3 +45,47 @@ def generate_pokemon_models():
     except urllib.error.URLError as e:
         print("URLError encountered.")
         print(e)
+
+def set_gen():
+    pokemon = pokedex_api.models.Pokemon.objects.all()
+    for poke in pokemon:
+        poke.generation = get_generation(poke.id)
+        poke.save()
+
+def get_no_img():
+    pokemon = pokedex_api.models.Pokemon.objects.all()
+    ps = []
+    for poke in pokemon:
+        if poke.img == "/pokemon_imgs/pokemon_home_transporter_pokeball.png":
+            print(poke.id, poke.name)
+            ps.append(poke.id)
+    print(ps)
+
+
+def generateUrlNames():
+    pokemon = pokedex_api.models.Pokemon.objects.all()
+    for poke in pokemon:
+        poke.urlName=poke.name.lower()
+        poke.save()
+
+def format_num(num):
+    num = str(num)
+    if len(num) < 3:
+        str_num = '0' * (3-len(num))
+        num = str_num + num
+    return num
+
+def generateImg():
+    pokemon = pokedex_api.models.Pokemon.objects.all()
+    for poke in pokemon:
+        file_name = 'pokemon_icon_' + format_num(poke.id) + '_00.png'
+        backup_name = 'pm' + poke.id + '.icon.png'
+        if os.path.exists("C://Users/dan19/Documents/Full_Pokedex/full_pokedex/full_pokedex/pokemon_imgs/" + file_name):
+            poke.img = '/pokemon_imgs/' + file_name
+            poke.save()
+        elif os.path.exists("C://Users/dan19/Documents/Full_Pokedex/full_pokedex/full_pokedex/pokemon_imgs/" + backup_name):
+            poke.img = '/pokemon_imgs/' + backup_name
+            poke.save()
+        else:
+            poke.img = '/pokemon_imgs/pokemon_home_transporter_pokeball.png'
+            poke.save()
