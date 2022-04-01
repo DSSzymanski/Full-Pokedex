@@ -12,6 +12,12 @@ class Pokemon(models.Model):
     )
     name = models.CharField(max_length=15, verbose_name="Name of Pokemon.")
     generation = models.PositiveIntegerField(default=1, verbose_name="Generation Number")
+    img = models.ImageField(upload_to='pokemon_imgs', verbose_name="Image of pokemon")
+
+    has_been_released = models.BooleanField(default=False, verbose_name="If the pokemon has been released.")
+    has_shiny = models.BooleanField(default=False, verbose_name="If the pokemon has a shiny form released.")
+    has_shadow = models.BooleanField(default=False, verbose_name="If the pokemon has a shadow form released.")
+    has_mega = models.BooleanField(default=False, verbose_name="If the pokemon has a mega form.")
 
     @classmethod
     def create(cls, name: str, number: str, generation: int):
@@ -33,5 +39,3 @@ class Record(models.Model):
     purified = models.BooleanField(default=False, verbose_name="If the shadow Pokemon has been purified.")
     perfect = models.BooleanField(default=False, verbose_name="If the perfect Pokemon has been caught.")
     mega = models.BooleanField(default=False, verbose_name="If the Pokemon's mega form has been caught.")
-
-    has_mega = models.BooleanField(default=False, verbose_name="If the pokemon has a mega form.")
