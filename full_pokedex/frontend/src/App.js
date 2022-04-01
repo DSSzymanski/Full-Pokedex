@@ -30,7 +30,7 @@ class App extends React.Component {
             <div key={index} className='pokemonDiv'>
               {poke.name}
               <div className='imgDiv'>
-                <img src={"https://img.pokemondb.net/sprites/go/normal/" + poke.name.toLowerCase() + ".png"} alt={poke.name} className='pokeImg' />
+                <img src={'http://127.0.0.1:8000' + poke.img} alt={poke.name} className='pokeImg' />
               </div>
               {poke.gen}
             </div>

@@ -128,6 +128,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = path.join(BASE_DIR, 'full_pokedex')
+
 STATICFILES_DIRS = [
     path.join(BASE_DIR, 'frontend/build/static')
 ]
