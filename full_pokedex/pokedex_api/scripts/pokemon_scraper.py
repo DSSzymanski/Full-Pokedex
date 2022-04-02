@@ -89,3 +89,33 @@ def generateImg():
         else:
             poke.img = '/pokemon_imgs/pokemon_home_transporter_pokeball.png'
             poke.save()
+
+def generate_released_pokemon():
+    with open("C://Users/dan19/Desktop/catalog.html") as file:
+        soup = BeautifulSoup(file, 'html.parser')
+    cards = soup.find_all('div', class_='pokemonOption sighted')
+    for card in cards:
+        poke_num = card.span.get_text()[1:]
+        poke_to_change = pokedex_api.models.Pokemon.objects.get(id=poke_num)
+        poke_to_change.has_been_released = True
+        poke_to_change.save()
+
+def generate_shiny_pokemon():
+    with open("C://Users/dan19/Desktop/catalog.html") as file:
+        soup = BeautifulSoup(file, 'html.parser')
+    cards = soup.find_all('div', attrs={'data-shiny-released':'1'})
+    for card in cards:
+        poke_num = card.span.get_text()[1:]
+        poke_to_change = pokedex_api.models.Pokemon.objects.get(id=poke_num)
+        poke_to_change.has_shiny = True
+        poke_to_change.save()
+
+def generate_shadow_pokemon():
+    with open("C://Users/dan19/Desktop/catalog.html") as file:
+        soup = BeautifulSoup(file, 'html.parser')
+    cards = soup.find_all('div', attrs={'data-shadow-released':'1'})
+    for card in cards:
+        poke_num = card.span.get_text()[1:]
+        poke_to_change = pokedex_api.models.Pokemon.objects.get(id=poke_num)
+        poke_to_change.has_shadow = True
+        poke_to_change.save()

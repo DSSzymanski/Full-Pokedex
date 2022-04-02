@@ -20,7 +20,7 @@ class RecordItem extends React.Component {
         if(!this.state.showRecord) {
             return null;
         }
-        return(
+        return (
             <div className="buttonDiv">
                 <button onClick={this.onClick}>
                     <img 
