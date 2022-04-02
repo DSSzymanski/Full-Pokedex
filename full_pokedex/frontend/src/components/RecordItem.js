@@ -5,23 +5,28 @@ class RecordItem extends React.Component {
         super(props);
         this.state = {
             showRecord: props.show,
-            isAchieved: props.achieved,
+            isAchieved: props.isAchieved,
             icon: props.icon,
             text: props.text,
         }
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+        this.setState({isAchieved: !this.state.isAchieved})
     }
 
     render() {
-        if(!this.state.showRecord){
+        if(!this.state.showRecord) {
             return null;
         }
         return(
             <div className="buttonDiv">
-                <button>
+                <button onClick={this.onClick}>
                     <img 
                         src={this.state.icon}
                         alt={this.state.text}
-                        className="iconImage"
+                        className={this.state.isAchieved ? "iconImage" : "iconImage greyscale"}
                     />
                 </button>
             </div>
