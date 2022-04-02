@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react'
+import Card from './components/Card'
 
 class App extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class App extends React.Component {
       pokemonList: [],
       recordList: [],
       numGens: 0,
+      icons: [],
     }
   };
 
@@ -22,18 +24,12 @@ class App extends React.Component {
 
   render(){
     var pokemon = this.state.pokemonList
-    var numGens = this.state.numGens
+    //var numGens = this.state.numGens
     return(
       <div className="container">
         {pokemon.map((poke, index) => {
           return(
-            <div key={index} className='pokemonDiv'>
-              {poke.name}
-              <div className='imgDiv'>
-                <img src={'http://127.0.0.1:8000' + poke.img} alt={poke.name} className='pokeImg' />
-              </div>
-              {poke.gen}
-            </div>
+            <Card key={index} pokemon={poke} />
           )
         })}
       </div>
