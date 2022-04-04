@@ -6,7 +6,7 @@ from .models import Pokemon, Record
 class PokemonAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'generation', 'img')
     list_filter = ['generation']
-    search_fields = ['name']
+    search_fields = ['id', 'name']
     ordering = ('id',)
 
 @admin .register(Record)

@@ -17,6 +17,7 @@ class RecordItem extends React.Component {
     }
 
     render() {
+        //If category hasn't been released yet, do not generate record icon.
         if(!this.state.showRecord) {
             return null;
         }
