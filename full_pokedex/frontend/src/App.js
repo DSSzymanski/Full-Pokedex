@@ -24,14 +24,33 @@ class App extends React.Component {
 
   render(){
     var pokemon = this.state.pokemonList
-    //var numGens = this.state.numGens
+    var genArr = []
+    for(let i = 1; i <= this.state.numGens; i++) {
+      genArr.push(i);
+    }
     return(
       <div className="container">
-        {pokemon.map((poke, index) => {
-          return(
-            <Card key={index} pokemon={poke} />
-          )
-        })}
+        {
+          genArr.map((gen, index) => {
+            return(
+              <div key={index} className="genContainer">
+                <h1 className="genHeader">
+                  Generation {gen}
+                </h1>
+                <div className="pokemonContainer">
+                  {pokemon.map((poke, index) => {
+                    if(poke.generation === gen){
+                      return(
+                        <Card key={index} pokemon={poke} />
+                        )
+                      }
+                    else{return null;}
+                  })}
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
     )
   }
