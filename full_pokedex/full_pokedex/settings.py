@@ -64,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            path.join(BASE_DIR, 'frontend/build')
+            BASE_DIR.joinpath('frontend')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -132,7 +132,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = path.join(BASE_DIR, 'full_pokedex')
 
 STATICFILES_DIRS = [
-    path.join(BASE_DIR, 'frontend/build/static')
+    BASE_DIR.joinpath('frontend/build/static')
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -144,3 +144,8 @@ CORS_ORIGIN_WHITELIST = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = True
