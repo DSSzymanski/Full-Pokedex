@@ -11,11 +11,11 @@ function Card(props) {
         <div className="container recordContainer">
             <PokemonItem pokemon={props.pokemon} caught={false} />
             <div className="recordDiv">
-                <RecordItem icon={'images/shiny_icon.png'} text= {'shiny'} show={props.pokemon.has_shiny} />
-                <RecordItem icon={'images/ui_bg_lucky_pokemon.png'} text= {'lucky'} show={true} />
-                <RecordItem icon={'images/ic_shadow.png'} text= {'shadow'} show={props.pokemon.has_shadow} />
-                <RecordItem icon={'images/ic_purified.png'} text= {'purified'} show={props.pokemon.has_shadow} />
-                <RecordItem icon={'images/ic_mega.png'} text= {'mega'} show={props.pokemon.has_mega}/>
+                <RecordItem icon={'http://localhost:8000/static/images/shiny_icon.png'} text= {'shiny'} show={props.pokemon.has_shiny} />
+                <RecordItem icon={'http://localhost:8000/static/images/ui_bg_lucky_pokemon.png'} text= {'lucky'} show={true} />
+                <RecordItem icon={'http://localhost:8000/static/images/ic_shadow.png'} text= {'shadow'} show={props.pokemon.has_shadow} />
+                <RecordItem icon={'http://localhost:8000/static/images/ic_purified.png'} text= {'purified'} show={props.pokemon.has_shadow} />
+                <RecordItem icon={'http://localhost:8000/static/images/ic_mega.png'} text= {'mega'} show={props.pokemon.has_mega}/>
             </div>
         </div>
     )
