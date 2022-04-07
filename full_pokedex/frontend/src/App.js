@@ -9,7 +9,6 @@ class App extends React.Component {
       pokemonList: [],
       recordList: [],
       numGens: 0,
-      icons: [],
     }
   };
 
