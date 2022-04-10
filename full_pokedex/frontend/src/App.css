@@ -12,14 +12,17 @@ body {
 }
 
 .pokemonContainer {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .recordContainer {
   display: block;
-  width: 8vw;
-  height: 20vh;
+  min-width: 100px;
+  max-width: 8vw;
+  min-height: 100px;
+  max-height: 20vh;
   padding-bottom: 40px;
   margin: 10px;
   background-color: burlywood;
@@ -63,10 +66,6 @@ button:hover, .pokeImg:hover {
   display: flex;
   justify-content: center;
   width: 100%;
-}
-
-.pokeImg {
-  height: 10;
 }
 
 .pokemonDiv {
