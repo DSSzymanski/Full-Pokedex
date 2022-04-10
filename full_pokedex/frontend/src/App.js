@@ -11,25 +11,17 @@ class App extends React.Component {
       <AuthProvider>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
-          {/* <Route
+          <Route
             exact 
             path="/"
             element={
               <MainPage />
             }
-          /> */}
+          />
         </Routes>
       </AuthProvider>
     )
   }
-}
-
-const Dashboard = () => {
-  return (
-    <>
-      <h2>Test</h2>
-    </>
-  )
 }
 
 // class App extends React.Component {
