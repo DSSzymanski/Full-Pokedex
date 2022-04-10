@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-    let [authTokens, setAuthTokens] = useState(() => 
+    let [authTokens, setAuthTokens] = useState(() =>
         localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null
     )
     let [user, setUser] = useState(() =>
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 "Content-Type": 'application/json'
             },
-            body: JSON.stringify({ 'refresh': authTokens.refresh })
+            body: JSON.stringify({ 'refresh': authTokens?.refresh })
         })
         let data = await response.json()
         if (response.status === 200) {
@@ -61,9 +61,15 @@ export const AuthProvider = ({ children }) => {
         else {
             logoutUser();
         }
+        if(loading){
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
+        if(loading) {
+            updateToken()
+        }
         let intervalTime = 3 * 60 * 1000
         let interval = setInterval(() => {
             if(authTokens) {
@@ -81,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {loading ? null : children}
         </AuthContext.Provider>
     );
 }
