@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .serializers import PokemonSerializer, RecordSerializer
@@ -13,8 +14,6 @@ def getRoutes(request):
         'Pokemon List':'/pokemon-list/',
         'Pokemon Detail View':'/pokemon-detail/<str:pk>/',
         'Record List':'record-list',
-        'User Record List':'record-list/<str:owner>/',
-        'User Record Detail View':'record-detail/<str:owner>/<str:pokemon>'
     }
     return Response(api_routes)
 
@@ -31,13 +30,9 @@ def pokemonDetail(request, pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def recordList(request):
-    record = Record.objects.all()
-    serializer = RecordSerializer(record, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def userRecordList(request, owner):
-    record = Record.objects.filter(owner=owner)
-    serializer = RecordSerializer(record, many=True)
+    user = request.user
+    records = user.record_set.all()
+    serializer = RecordSerializer(records, many=True)
     return Response(serializer.data)

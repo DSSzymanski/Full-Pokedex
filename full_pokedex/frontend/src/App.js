@@ -24,28 +24,4 @@ class App extends React.Component {
   }
 }
 
-// class App extends React.Component {
-//   render() {
-//     return(
-//       <AuthProvider.Consumer>
-//         <Routes>
-//           <Route path='/login' element={<LoginPage />} />
-//           <Route
-//             exact 
-//             path="/"
-//             element={
-//               <MainPage />
-//             }
-//           />
-//         </Routes>
-//       </AuthProvider.Consumer>
-//     )
-//   }
-// }
-
-// let RequireAuth = ({children, redirectTo}) => {
-//   let { user } = useContext(AuthContext)
-//   return user !== null ? children : <Navigate to={redirectTo} />
-// }
-
 export default App;
