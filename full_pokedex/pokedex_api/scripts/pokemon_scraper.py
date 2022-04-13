@@ -1,4 +1,5 @@
 import pokedex_api.models
+from django.contrib.auth import get_user_model
 import os
 from bs4 import BeautifulSoup
 from urllib import request
@@ -61,6 +62,17 @@ def get_no_img():
             ps.append(poke.id)
     print(ps)
 
+def create_base_records():
+    pokemon = pokedex_api.models.Pokemon.objects.all()
+    user = get_user_model()
+    test_user = user.objects.get(id=1)
+
+    for poke in pokemon:
+        record = pokedex_api.models.Record(
+            owner=test_user,
+            pokemon=poke,
+        )
+        record.save()
 
 def generateUrlNames():
     pokemon = pokedex_api.models.Pokemon.objects.all()
@@ -119,3 +131,4 @@ def generate_shadow_pokemon():
         poke_to_change = pokedex_api.models.Pokemon.objects.get(id=poke_num)
         poke_to_change.has_shadow = True
         poke_to_change.save()
+

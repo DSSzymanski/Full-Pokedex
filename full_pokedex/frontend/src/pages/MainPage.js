@@ -45,11 +45,11 @@ const MainPage = () => {
     else {
       logoutUser();
     }
-    console.log(data);
   }
 
-  return(
-    <div className="container">
+  const LoggedOutPage = () => { 
+    return(
+      <div className="container">
       {
         genList.map((gen, index) => {
           return(
@@ -64,6 +64,34 @@ const MainPage = () => {
                       <Card key={index} pokemon={poke} />
                       )
                     }
+                    else{return null;}
+                })}
+              </div>
+            </div>
+          )
+        })
+      }
+      </div>
+    )
+  }
+
+  const LoggedInPage = () => { 
+    return(
+      <div className="container">
+      {
+        genList.map((gen, index) => {
+          return(
+            <div key={index} className="genContainer">
+              <h1 className="genHeader">
+                Generation {gen}
+              </h1>
+              <div className="pokemonContainer">
+                {recordList.map((record, index) => {
+                  if(record.pokemon.generation === gen){
+                    return(
+                      <Card key={index} record={record} pokemon={record.pokemon} />
+                    )
+                  }
                   else{return null;}
                 })}
               </div>
@@ -71,7 +99,12 @@ const MainPage = () => {
           )
         })
       }
-    </div>
+      </div>
+    )
+  }
+
+  return(
+    <LoggedInPage />
   )
 }
 
