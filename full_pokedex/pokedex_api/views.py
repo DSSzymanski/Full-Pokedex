@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -28,6 +29,18 @@ def pokemonDetail(request, pk):
     pokemon = Pokemon.objects.get(id=pk)
     serializer = PokemonSerializer(pokemon, many=False)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateRecord(request, pk):
+    record = Record.objects.get(id=pk)
+    serializer = RecordSerializer(instance=record, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_200_OK)
+    print(serializer.data)
+    print()
+    print(serializer.errors)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

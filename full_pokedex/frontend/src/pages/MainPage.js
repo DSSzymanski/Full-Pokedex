@@ -9,26 +9,9 @@ const MainPage = () => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
-    getPokemonDataFromAPI();
     getRecordDataFromAPI();
   }, [])
 
-  let getPokemonDataFromAPI = async() => {
-    let response = await fetch('http://127.0.0.1:8000/api/pokemon-list');
-    let data = await response.json();
-    if(response.status === 200){
-      setPokemonList(data);
-    }
-    else {
-      logoutUser();
-    }
-    let numGens = data.at(-1).generation;
-    let newGenList = [];
-    for(let i = 1; i <= numGens; i++) {
-      newGenList.push(i);
-    }
-    setGenList(newGenList);
-  }
 
   let getRecordDataFromAPI = async() => {
     let response = await fetch('http://127.0.0.1:8000/api/record-list', {
@@ -45,9 +28,15 @@ const MainPage = () => {
     else {
       logoutUser();
     }
+    let numGens = data.at(-1).pokemon.generation;
+    let newGenList = [];
+    for(let i = 1; i <= numGens; i++) {
+      newGenList.push(i);
+    }
+    setGenList(newGenList);
   }
 
-  const LoggedOutPage = () => { 
+  const LoggedOutPage = () => {
     return(
       <div className="container">
       {
@@ -75,7 +64,7 @@ const MainPage = () => {
     )
   }
 
-  const LoggedInPage = () => { 
+  const LoggedInPage = () => {
     return(
       <div className="container">
       {

@@ -16,4 +16,5 @@ urlpatterns = [
     path('pokemon-detail/<str:pk>/', views.pokemonDetail, name='pokemon-detail'),
 
     path('record-list/', views.recordList, name='record-list'),
+    path('update-record/<int:pk>', views.updateRecord, name='update-record'),
 ]
