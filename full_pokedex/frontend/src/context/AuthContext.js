@@ -45,6 +45,11 @@ export const AuthProvider = ({ children }) => {
     }
 
     let updateToken = async() => {
+        //if no tokens exist, don't send call to api
+        if(!authTokens) {
+            setLoading(false);
+            return;
+        }
         let response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
             method: "POST",
             headers: {

@@ -11,12 +11,18 @@ class App extends React.Component {
     return (
       <AuthProvider>
         <Routes>
-          <Route path='/login' element={<LoginPage />} />
+          <Route path='/login' element={
+            <LoggedInRedirect>
+              <LoginPage />
+            </LoggedInRedirect>
+          } />
           <Route
             exact 
             path="/"
             element={
-              <MainPage />
+              <PrivateRoute>
+                <MainPage />
+              </PrivateRoute>
             }
           />
         </Routes>
@@ -25,11 +31,20 @@ class App extends React.Component {
   }
 }
 
-const PrivateRoute = ({children}) => {
+const LoggedInRedirect = ({children}) => {
+  let { user } = useContext(AuthContext);
+  if (user) {
+    return(
+      <Navigate to='/' />
+    )
+  }
+}
+
+const PrivateRoute = ({children, navTo='/login'}) => {
   let { user } = useContext(AuthContext);
   if(!user) {
     return(
-      <Navigate to='/login' />
+      <Navigate to={navTo} />
     )
   }
   return children;
