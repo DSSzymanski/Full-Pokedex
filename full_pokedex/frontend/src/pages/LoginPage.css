@@ -1,0 +1,58 @@
+form {
+    box-sizing: border-box;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+    padding: 25px;
+    width: 35%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+input {
+    border-radius: 5px;
+    font-size: 18px;
+    outline: none;
+    background-color:rgba(227, 227, 227, 0.95);
+}
+
+.signUpInput:focus {
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(255,0,0,1);
+    border: 2px solid lightcoral;
+}
+
+.loginInput:focus {
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(2,2,253,1);
+    border: 1px solid lightblue;
+}
+
+.submit, .submit:focus{
+    margin-top: auto;
+    background-color: white;
+    box-shadow: 0 0 0 0 white;
+}
+
+form > * {
+    margin-bottom: 10px;
+}
+
+.formDiv {
+    display: flex;
+}
+
+@media (max-width: 960px) {
+    form{
+        width: 75%;
+    }
+
+    .formDiv {
+        display: block;
+    }
+}
