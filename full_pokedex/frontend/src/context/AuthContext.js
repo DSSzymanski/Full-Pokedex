@@ -37,6 +37,34 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    let signUpUser = async(e) => {
+        e.preventDefault()
+        let response = await fetch("http://127.0.0.1:8000/api/create-user/", {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                'email': e.target.email.value,
+                'username': e.target.username.value,
+                'password': e.target.password.value
+            })
+        })
+        let data = await response.json()
+        if (response.status === 200) {
+            loginUser(e);
+        }
+        else {
+            let alertMsg = "";
+            for(const property in data) {
+                for(const msg in data[property]) {
+                    alertMsg = alertMsg.concat(data[property][msg] + '\n');
+                }
+            }
+            alert(alertMsg);
+        }
+    }
+
     let logoutUser = () => {
         setAuthTokens(null);
         setUser(null);
@@ -89,6 +117,7 @@ export const AuthProvider = ({ children }) => {
         logoutUser: logoutUser,
         user: user,
         authTokens: authTokens,
+        signUpUser: signUpUser,
     }
 
     return (

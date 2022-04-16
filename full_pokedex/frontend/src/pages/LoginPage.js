@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import './LoginPage.css';
 
 const LoginPage = () => {
-  let { loginUser } = useContext(AuthContext);
+  let { loginUser, signUpUser } = useContext(AuthContext);
   return (
     <div className='formDiv'>
       <form id="loginForm" onSubmit={ loginUser }>
@@ -12,7 +12,7 @@ const LoginPage = () => {
         <input type="password" className='loginInput' name="password" placeholder="Enter Password." />
         <input type="submit" className="submit" />
       </form>
-      <form id="signUpForm" >
+      <form id="signUpForm" onSubmit={ signUpUser }>
         <h3>Sign Up</h3>
         <input type="email" className='signUpInput' name="email" placeholder="Enter Email." />
         <input type="text" className='signUpInput' name="username" placeholder="Enter Username." />
