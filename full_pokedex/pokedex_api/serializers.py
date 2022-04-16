@@ -32,4 +32,10 @@ class UserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
+
+        pokemonList = Pokemon.objects.all()
+        for pokemon in pokemonList:
+            record = Record(owner=user, pokemon=pokemon)
+            record.save()
+
         return user
