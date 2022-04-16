@@ -1,11 +1,13 @@
+from django.http import Http404
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
-from .serializers import PokemonSerializer, RecordSerializer
+from .serializers import PokemonSerializer, RecordSerializer, UserSerializer
 from .models import Pokemon, Record
 
 # Create your views here.
@@ -37,9 +39,15 @@ def updateRecord(request, pk):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status.HTTP_200_OK)
-    print(serializer.data)
-    print()
-    print(serializer.errors)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def createUser(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_200_OK)
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
