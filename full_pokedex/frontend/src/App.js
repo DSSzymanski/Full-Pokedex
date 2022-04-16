@@ -38,6 +38,7 @@ const LoggedInRedirect = ({children}) => {
       <Navigate to='/' />
     )
   }
+  return children;
 }
 
 const PrivateRoute = ({children, navTo='/login'}) => {
