@@ -1,13 +1,14 @@
 import uuid
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Pokemon(models.Model):
     id = models.CharField(
         max_length=4,
         primary_key=True,
-        editable=False,
+        editable=True,
         verbose_name="National Pokdex Number."
     )
     name = models.CharField(max_length=15, verbose_name="Name of Pokemon.")
@@ -22,6 +23,11 @@ class Pokemon(models.Model):
     @classmethod
     def create(cls, name: str, number: str, generation: int):
         pokemon = cls(id=number, name=name, generation=generation)
+
+        users = User.objects.all()
+        for user in users:
+            record = Record.objects.create(owner=user, pokemon=pokemon)
+
         return pokemon
     
     def __str__(self) -> str:
