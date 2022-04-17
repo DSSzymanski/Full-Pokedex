@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage'
 import LoginPage from './pages/LoginPage'
 import {AuthProvider} from './context/AuthContext';
 import AuthContext from './context/AuthContext';
+import Navbar from './components/Navbar';
 
 class App extends React.Component {
   render(){
@@ -12,17 +13,23 @@ class App extends React.Component {
       <AuthProvider>
         <Routes>
           <Route path='/login' element={
-            <LoggedInRedirect>
-              <LoginPage />
-            </LoggedInRedirect>
+            <>
+              <Navbar />
+              <LoggedInRedirect>
+                <LoginPage />
+              </LoggedInRedirect>
+            </>
           } />
           <Route
             exact 
             path="/"
             element={
-              <PrivateRoute>
-                <MainPage />
-              </PrivateRoute>
+              <>
+                <Navbar />
+                <PrivateRoute>
+                  <MainPage />
+                </PrivateRoute>
+              </>
             }
           />
         </Routes>
