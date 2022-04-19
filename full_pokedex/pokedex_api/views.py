@@ -6,11 +6,11 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .serializers import PokemonSerializer, RecordSerializer, UserSerializer
+from .serializers import PokemonSerializer, RecordSerializer, UserSerializer, UpdatedTokenObtainPairSerializer
 from .models import Pokemon, Record
 
-# Create your views here.
 @api_view(["GET"])
 def getRoutes(request):
     api_routes = {
@@ -19,6 +19,9 @@ def getRoutes(request):
         'Record List':'record-list',
     }
     return Response(api_routes)
+
+class UpdatedTokenObtainPairView(TokenObtainPairView):
+    serializer_class = UpdatedTokenObtainPairSerializer
 
 @api_view(['GET'])
 def pokemonList(request):

@@ -3,6 +3,14 @@ from rest_framework import serializers
 from .models import Pokemon, Record
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class UpdatedTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        return token
 
 class PokemonSerializer(serializers.ModelSerializer):
     class Meta:

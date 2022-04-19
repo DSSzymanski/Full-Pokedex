@@ -12,7 +12,7 @@ const Navbar = () => {
           <div className='Navbar'>
             <div className="header">
               <h6>
-                {user.user_id}'s Pokedex
+                {user.username}'s Pokedex
               </h6>
             </div>
             <div className="logoutDiv">

@@ -8,8 +8,9 @@
 }
 
 .logoutDiv {
-    left: 90%;
-    position: fixed;
+    position: absolute;
+    right: 0;
+    margin-right: 5vw;
 }
 
 h6 {
