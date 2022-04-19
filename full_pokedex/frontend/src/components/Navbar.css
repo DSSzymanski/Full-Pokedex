@@ -1,0 +1,17 @@
+.Navbar {
+    display: flex;
+    justify-content: center;
+    background: rgb(101,100,100);
+    background: linear-gradient(0deg, rgba(101,100,100,0) 0%, rgba(78,78,78,0.8631827731092436) 10%, rgba(34,34,34,1) 100%);
+    color: white;
+    font-size: 18px;
+}
+
+.logoutDiv {
+    left: 90%;
+    position: fixed;
+}
+
+h6 {
+    margin: 20px;
+}
