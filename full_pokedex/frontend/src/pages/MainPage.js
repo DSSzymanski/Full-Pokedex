@@ -3,7 +3,6 @@ import AuthContext from '../context/AuthContext';
 import Card from '../components/Card'
 
 const MainPage = () => {
-  let [pokemonList, setPokemonList] = useState([]);
   let [recordList, setRecordList] = useState([]);
   let [genList, setGenList] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
@@ -11,7 +10,6 @@ const MainPage = () => {
   useEffect(() => {
     getRecordDataFromAPI();
   }, [])
-
 
   let getRecordDataFromAPI = async() => {
     let response = await fetch('http://127.0.0.1:8000/api/record-list', {
@@ -36,64 +34,30 @@ const MainPage = () => {
     setGenList(newGenList);
   }
 
-  const LoggedOutPage = () => {
-    return(
-      <div className="container">
-      {
-        genList.map((gen, index) => {
-          return(
-            <div key={index} className="genContainer">
-              <h1 className="genHeader">
-                Generation {gen}
-              </h1>
-              <div className="pokemonContainer">
-                {pokemonList.map((poke, index) => {
-                  if(poke.generation === gen){
-                    return(
-                      <Card key={index} pokemon={poke} />
-                      )
-                    }
-                    else{return null;}
-                })}
-              </div>
-            </div>
-          )
-        })
-      }
-      </div>
-    )
-  }
-
-  const LoggedInPage = () => {
-    return(
-      <div className="container">
-      {
-        genList.map((gen, index) => {
-          return(
-            <div key={index} className="genContainer">
-              <h1 className="genHeader">
-                Generation {gen}
-              </h1>
-              <div className="pokemonContainer">
-                {recordList.map((record, index) => {
-                  if(record.pokemon.generation === gen){
-                    return(
-                      <Card key={index} record={record} pokemon={record.pokemon} />
-                    )
-                  }
-                  else{return null;}
-                })}
-              </div>
-            </div>
-          )
-        })
-      }
-      </div>
-    )
-  }
-
   return(
-    <LoggedInPage />
+    <div className="container">
+    {
+      genList.map((gen, index) => {
+        return(
+          <div key={index} className="genContainer">
+            <h1 className="genHeader">
+              Generation {gen}
+            </h1>
+            <div className="pokemonContainer">
+              {recordList.map((record, index2) => {
+                if(record.pokemon.generation === gen){
+                  return(
+                    <Card key={index2} record={record} pokemon={record.pokemon} />
+                  )
+                }
+                else{return null;}
+              })}
+            </div>
+          </div>
+        )
+      })
+    }
+    </div>
   )
 }
 

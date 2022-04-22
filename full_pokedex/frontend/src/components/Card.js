@@ -1,28 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import PokemonItem from './PokemonItem';
-import RecordItem from './RecordItem'
 
 function Card(props) {
-    let [id, setId] = useState(props.record.id)
-    let [caught, setCaught] = useState(props.record.caught)
-    let [shiny, setShiny] = useState(props.record.shiny)
-    let [lucky, setLucky] = useState(props.record.lucky)
-    let [shadow, setShadow] = useState(props.record.shadow)
-    let [purified, setPurified] = useState(props.record.purified)
-    let [mega, setMega] = useState(props.record.mega)
-    let firstRender = useRef(true)
-
+    let [id, setId] = useState(props.record.id);
+    let [caught, setCaught] = useState(props.record.caught);
+    let [shiny, setShiny] = useState(props.record.shiny);
+    let [lucky, setLucky] = useState(props.record.lucky);
+    let [shadow, setShadow] = useState(props.record.shadow);
+    let [purified, setPurified] = useState(props.record.purified);
+    let [mega, setMega] = useState(props.record.mega);
+    let firstRender = useRef(true);
 
     let submitRecord = async() => {
-        console.log('http://127.0.0.1:8000/update-record/' + id)
-        console.log(JSON.stringify({
-            caught: caught,
-            shiny: shiny,
-            lucky: lucky,
-            shadow: shadow,
-            purified: purified,
-            mega: mega
-        }))
         let response = await fetch('http://127.0.0.1:8000/api/update-record/' + id, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -37,17 +25,15 @@ function Card(props) {
         })
         let data = await response.json()
         if(response.status === 200) {
-            console.log("200 ", data)
+            return;
         }
         else{
-            console.log("Error 400")
-            console.log(response.statusText)
+            alert(response.statusText);
         }
     }
 
     useEffect(() => {
         if (!firstRender.current) {
-            console.log(id)
             submitRecord();
         }
         else {
