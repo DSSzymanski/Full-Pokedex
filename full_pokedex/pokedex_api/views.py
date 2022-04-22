@@ -58,5 +58,10 @@ def createUser(request):
 def recordList(request):
     user = request.user
     records = user.record_set.all()
+    #catch account which was improperly initialized
+    if records.count() == 0:
+        for pokemon in Pokemon.objects.all():
+            Record.create(owner=user, pokemon=pokemon)
+        records = user.record_set.all()
     serializer = RecordSerializer(records, many=True)
     return Response(serializer.data)
