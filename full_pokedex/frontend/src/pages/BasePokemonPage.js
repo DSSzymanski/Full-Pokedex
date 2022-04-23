@@ -1,11 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react'
-import AuthContext from '../context/AuthContext';
-import Card from '../components/Card'
+import React, { useState, useEffect } from 'react'
+import BaseCard from '../components/BaseCard'
 
 const BasePokemonPage = () => {
   let [pokemonList, setPokemonList] = useState([]);
   let [genList, setGenList] = useState([]);
-  let { logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
     getPokemonDataFromAPI();
@@ -20,12 +18,12 @@ const BasePokemonPage = () => {
     })
     let data = await response.json();
     if(response.status === 200){
-      setRecordList(data);
+      setPokemonList(data);
     }
     else {
-      logoutUser();
+      alert("Error retrieving pokemon list from server.")
     }
-    let numGens = data.at(-1).pokemon.generation;
+    let numGens = data.at(-1).generation;
     let newGenList = [];
     for(let i = 1; i <= numGens; i++) {
       newGenList.push(i);
@@ -44,12 +42,9 @@ const BasePokemonPage = () => {
             </h1>
             <div className="pokemonContainer">
               {pokemonList.map((pokemon, index2) => {
-                if(record.pokemon.generation === gen){
+                if(pokemon.generation === gen){
                   return(
-                    <div>
-                      {pokemon.id}
-                    </div>
-                    //<Card key={index2} pokemon={pokemon} />
+                    <BaseCard key={index2} pokemon={pokemon} />
                   )
                 }
                 else{return null;}
