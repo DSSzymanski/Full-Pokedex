@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 function BaseCard(props) {
-    let [data, setData] = useState({
+    let [data, setData] = useState(() =>
+        localStorage.getItem(props.pokemon.id + "Record") ? JSON.parse(localStorage.getItem(props.pokemon.id + "Record")) :
+    {
         caught: false,
         shiny: false,
         lucky: false,
@@ -13,7 +15,7 @@ function BaseCard(props) {
 
     useEffect(() => {
         if (!firstRender.current) {
-            console.log('clicked');
+            localStorage.setItem(props.pokemon.id + "Record", JSON.stringify(data));
         }
         else {
             firstRender.current = false;
