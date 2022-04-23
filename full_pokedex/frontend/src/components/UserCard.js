@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-function Card(props) {
+const UserCard = (props) => {
     let [id, setId] = useState(props.record.id);
     let [caught, setCaught] = useState(props.record.caught);
     let [shiny, setShiny] = useState(props.record.shiny);
@@ -119,4 +119,4 @@ function Card(props) {
     )
 }
 
-export default Card
+export default UserCard;

@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import AuthContext from '../context/AuthContext';
-import Card from '../components/Card'
+import UserCard from '../components/UserCard'
 
-const MainPage = () => {
+const UserPokemonPage = () => {
   let [recordList, setRecordList] = useState([]);
   let [genList, setGenList] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
@@ -47,7 +47,7 @@ const MainPage = () => {
               {recordList.map((record, index2) => {
                 if(record.pokemon.generation === gen){
                   return(
-                    <Card key={index2} record={record} pokemon={record.pokemon} />
+                    <UserCard key={index2} record={record} pokemon={record.pokemon} />
                   )
                 }
                 else{return null;}
@@ -61,4 +61,4 @@ const MainPage = () => {
   )
 }
 
-export default MainPage;
+export default UserPokemonPage;
