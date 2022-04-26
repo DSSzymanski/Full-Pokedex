@@ -28,7 +28,7 @@ const Navbar = () => {
               </h6>
             </div>
             <div className="logoutDiv">
-              <Link to='/login'>Sign up</Link>
+              <Link to='/login'><h6>Sign Up</h6></Link>
             </div>
           </div>
           )
