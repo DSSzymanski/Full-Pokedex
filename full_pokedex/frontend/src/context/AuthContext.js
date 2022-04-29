@@ -37,6 +37,18 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    let getLocalStorageRecordsAsJson = () => {
+        const recordStr = 'Record'
+        let pokemonDataInStorage = {}
+        for (const key in localStorage) {
+            if (key.includes(recordStr)) {
+                const pokemonID = key.split(recordStr)[0];
+                pokemonDataInStorage[pokemonID] = localStorage.getItem(key);
+            }
+        }
+        return JSON.stringify(pokemonDataInStorage);
+    }
+
     let signUpUser = async(e) => {
         e.preventDefault()
         let response = await fetch("http://127.0.0.1:8000/api/create-user/", {
