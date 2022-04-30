@@ -1,3 +1,4 @@
+import json
 from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -47,10 +48,28 @@ def updateRecord(request, pk):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def createUser(request):
+    record_data = json.loads(request.data.pop("records", None))
+    username = request.data['username']
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+
+        #record data matches pokemon model id's to JSON strs of record data
+        for pokemon_id in record_data:
+            #get record from database using username and pokemon id
+            record_to_update = Record.objects.filter(
+                owner=User.objects.get(username=username)
+            ).filter(pokemon=Pokemon.objects.get(id=pokemon_id))[0]
+
+            record_serializer = RecordSerializer(instance=record_to_update, data=json.loads(record_data[pokemon_id]))
+
+            if record_serializer.is_valid():
+                record_serializer.save()
+            else:
+                return Response(serializer.errors, status.HTTP_405_METHOD_NOT_ALLOWED)
+
         return Response(serializer.data, status.HTTP_200_OK)
+    #default
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

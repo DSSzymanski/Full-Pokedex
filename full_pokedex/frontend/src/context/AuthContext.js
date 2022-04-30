@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem("authTokens", JSON.stringify(data))
-            navigate('/')
         }
         else {
             alert("Invalid login information.")
@@ -59,12 +58,13 @@ export const AuthProvider = ({ children }) => {
             body: JSON.stringify({
                 'email': e.target.email.value,
                 'username': e.target.username.value,
-                'password': e.target.password.value
+                'password': e.target.password.value,
+                'records': getLocalStorageRecordsAsJson(),
             })
         })
         let data = await response.json()
         if (response.status === 200) {
-            loginUser(e);
+            await loginUser(e);
         }
         else {
             let alertMsg = "";
