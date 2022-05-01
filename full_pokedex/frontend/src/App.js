@@ -29,7 +29,9 @@ class App extends React.Component {
             element={
               <>
                 <Navbar />
-                <BasePokemonPage />
+                <LoggedInRedirect>
+                  <BasePokemonPage />
+                </LoggedInRedirect>
               </>
             }
           />
