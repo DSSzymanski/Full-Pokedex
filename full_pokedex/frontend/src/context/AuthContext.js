@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     )
     let [loading, setLoading] = useState(true)
     const navigate = useNavigate()
+    const recordStr = 'Record'
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -37,7 +38,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     let getLocalStorageRecordsAsJson = () => {
-        const recordStr = 'Record'
         let pokemonDataInStorage = {}
         for (const key in localStorage) {
             if (key.includes(recordStr)) {
@@ -46,6 +46,14 @@ export const AuthProvider = ({ children }) => {
             }
         }
         return JSON.stringify(pokemonDataInStorage);
+    }
+
+    let clearLocalStorageRecords = () => {
+        for (const key in localStorage) {
+            if (key.includes(recordStr)) {
+                localStorage.removeItem(key);
+            }
+        }
     }
 
     let signUpUser = async(e) => {
@@ -65,6 +73,7 @@ export const AuthProvider = ({ children }) => {
         let data = await response.json()
         if (response.status === 200) {
             await loginUser(e);
+            clearLocalStorageRecords();
         }
         else {
             let alertMsg = "";
