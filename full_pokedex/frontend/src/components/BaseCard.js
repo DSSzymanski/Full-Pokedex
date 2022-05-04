@@ -1,6 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-
+/**
+ * The BaseCard element is a container style element that allows a non-user to show and store data on a single Pokemon.
+ * Depending on the Pokemon passed in through the props, the card will display the image of the pokemon, and clickable buttons
+ * for if a certain version of the pokemon has been obtained (caught, shiny, lucky, shadow, purified, mega). The picture and
+ * buttons start out having the greyscale css class to show it dimmed or unobtained and once clicked it will remove the class.
+ * Once clicked, the useEffect method will set a local storage variable of an object using the id of the pokemon as a key and
+ * containing the obtained versions data.
+ * 
+ * @param {*} props: Props should contain a single pokemon object retrieved from the API to generate a card from.
+ * @returns BaseCard Element
+ */
 function BaseCard(props) {
+    //Load data object from local storage or set a default object if there is no matching key.
     let [data, setData] = useState(() =>
         localStorage.getItem(props.pokemon.id + "Record") ? JSON.parse(localStorage.getItem(props.pokemon.id + "Record")) :
     {
@@ -11,8 +22,10 @@ function BaseCard(props) {
         purified: false,
         mega: false,
     })
+    //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
 
+    //triggers on all button clicks and updates localStorage with data about the card
     useEffect(() => {
         if (!firstRender.current) {
             localStorage.setItem(props.pokemon.id + "Record", JSON.stringify(data));

@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
-
+/**
+ * The UserCard element is a container style element that allows a signed in user to show and store data on a single Pokemon.
+ * Depending on the Pokemon contained in the record object passed in through the props, the card will display the image of the 
+ * pokemon, and clickable buttons for if a certain version of the pokemon has been obtained (caught, shiny, lucky, shadow, purified,
+ * mega). The picture and buttons start out having the greyscale css class to show it dimmed or unobtained and once clicked it
+ * will remove the class. Once clicked, the useEffect method will send a call to the update-record method of the API. Once 
+ * called, it will update the database Record Item.
+ * 
+ * @param {*} props: Props should contain a single record object retrieved from the API to generate a card from.
+ * @returns BaseCard Element
+ */
 const UserCard = (props) => {
     let [id, setId] = useState(props.record.id);
     let [caught, setCaught] = useState(props.record.caught);
@@ -8,8 +18,13 @@ const UserCard = (props) => {
     let [shadow, setShadow] = useState(props.record.shadow);
     let [purified, setPurified] = useState(props.record.purified);
     let [mega, setMega] = useState(props.record.mega);
+    //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
 
+    /**
+     * Method used for the API call to update a record in the database. Sends the data about which
+     * versions have been maintained as a JSON string.
+     */
     let submitRecord = async() => {
         let response = await fetch('http://127.0.0.1:8000/api/update-record/' + id, {
             method: 'PUT',
@@ -32,6 +47,7 @@ const UserCard = (props) => {
         }
     }
 
+    //Triggers on any button click in the card and calls submit record method if it isn't the initial render.
     useEffect(() => {
         if (!firstRender.current) {
             submitRecord();
