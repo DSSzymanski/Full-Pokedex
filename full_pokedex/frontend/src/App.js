@@ -53,6 +53,7 @@ class App extends React.Component {
   }
 }
 
+//private route used to redirect from base page or login pages (non user pages) to the route page for users.
 const LoggedInRedirect = ({children}) => {
   let { user } = useContext(AuthContext);
   if (user) {
@@ -63,6 +64,7 @@ const LoggedInRedirect = ({children}) => {
   return children;
 }
 
+//private route used to redirect from the user generated page if there isn't a user logged in.
 const PrivateRoute = ({children, navTo='/base'}) => {
   let { user } = useContext(AuthContext);
   if(!user) {

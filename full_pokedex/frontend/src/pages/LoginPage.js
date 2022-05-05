@@ -2,6 +2,13 @@ import React, { useContext } from 'react';
 import AuthContext from "../context/AuthContext";
 import './LoginPage.css';
 
+/**
+ * Basic page with 2 forms, one for signing up for a new user and one for
+ * logging in an existing user. Uses context to handle the API calls and
+ * redirection after a valid call.
+ *
+ * @returns log in / signup page element
+ */
 const LoginPage = () => {
   let { loginUser, signUpUser } = useContext(AuthContext);
   return (
