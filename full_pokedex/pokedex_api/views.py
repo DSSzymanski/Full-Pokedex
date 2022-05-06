@@ -30,12 +30,6 @@ def pokemonList(request):
     serializer = PokemonSerializer(pokemon, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def pokemonDetail(request, pk):
-    pokemon = Pokemon.objects.get(id=pk)
-    serializer = PokemonSerializer(pokemon, many=False)
-    return Response(serializer.data)
-
 @api_view(['PUT'])
 def updateRecord(request, pk):
     record = Record.objects.get(id=pk)
