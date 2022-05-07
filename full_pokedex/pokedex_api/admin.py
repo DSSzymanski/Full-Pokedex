@@ -5,6 +5,11 @@ from .models import Pokemon, Record
 
 @admin.register(Pokemon)
 class PokemonAdmin(admin.ModelAdmin):
+    """
+    Admin for the Pokemon Model.
+    Basic view showing all pokemon.
+    Creates new record for all users upon creation.
+    """
     list_display = ('id', 'name', 'generation', 'img')
     list_filter = ['generation']
     search_fields = ['id', 'name']
@@ -18,5 +23,8 @@ class PokemonAdmin(admin.ModelAdmin):
 
 @admin.register(Record)
 class RecordAdmin(admin.ModelAdmin):
+    """
+    Standard admin for records showing all records.
+    """
     list_display = [field.name for field in Record._meta.get_fields()]
     list_filter = ['owner']

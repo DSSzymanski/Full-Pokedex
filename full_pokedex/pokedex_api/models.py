@@ -3,8 +3,12 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
-# Create your models here.
 class Pokemon(models.Model):
+    """
+    Model representing a single pokemon used for generating frontend cards.
+    Upon creation, creates a new record for all users.
+    Fields labeled starting with 'has_' are used for the card buttons.
+    """
     id = models.CharField(
         max_length=4,
         primary_key=True,
@@ -15,6 +19,7 @@ class Pokemon(models.Model):
     generation = models.PositiveIntegerField(default=1, verbose_name="Generation Number")
     img = models.ImageField(upload_to='pokemon_imgs', verbose_name="Image of pokemon")
 
+    #below are fields used to generate the frontend buttons.
     has_been_released = models.BooleanField(default=False, verbose_name="If the pokemon has been released.")
     has_shiny = models.BooleanField(default=False, verbose_name="If the pokemon has a shiny form released.")
     has_shadow = models.BooleanField(default=False, verbose_name="If the pokemon has a shadow form released.")
@@ -22,6 +27,9 @@ class Pokemon(models.Model):
 
     @classmethod
     def create(cls, name: str, number: str, generation: int):
+        """
+        Adds a new record for each user upon new Pokemon creation.
+        """
         pokemon = cls(id=number, name=name, generation=generation)
 
         users = User.objects.all()
@@ -34,6 +42,10 @@ class Pokemon(models.Model):
         return f"Pokemon: {self.name}, Number: {self.id}, Generation: {self.generation}"
 
 class Record(models.Model):
+    """
+    Record class stores information on which versions of a Pokemon have been obtained for each user.
+    Each record maps a pokemon to a user.
+    """
     id = models.BigAutoField(primary_key=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     pokemon = models.ForeignKey('Pokemon', on_delete=models.CASCADE)
