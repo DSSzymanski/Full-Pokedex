@@ -72,6 +72,7 @@ const UserCard = (props) => {
                         src={'http://127.0.0.1:8000' + props.record.pokemon.img}
                         alt={props.record.pokemon.name}
                         className={caught ? "pokeImg" : "pokeImg greyscale"}
+                        title={props.record.pokemon.name}
                         onClick={() => setCaught(!caught)}
                     />
                 </div>
@@ -79,7 +80,9 @@ const UserCard = (props) => {
             <div className="recordDiv">
                 { !props.record.pokemon.has_shiny ? null :
                     <div className="buttonDiv">
-                        <button onClick={() => setShiny(!shiny)}>
+                        <button
+                            title='Shiny'
+                            onClick={() => setShiny(!shiny)}>
                             <img
                                 src={"http://localhost:8000/static/images/shiny_icon.png"}
                                 alt={'shiny'}
@@ -89,7 +92,9 @@ const UserCard = (props) => {
                     </div>
                 }
                 <div className="buttonDiv">
-                    <button onClick={() => setLucky(!lucky)}>
+                    <button
+                        title='Lucky'
+                        onClick={() => setLucky(!lucky)}>
                         <img
                             src={"http://localhost:8000/static/images/ui_bg_lucky_pokemon.png"}
                             alt={'lucky'}
@@ -100,7 +105,9 @@ const UserCard = (props) => {
                 { !props.record.pokemon.has_shadow ? null :
                     <>
                         <div className="buttonDiv">
-                            <button onClick={() => setShadow(!shadow)}>
+                            <button
+                                title='Shadow'
+                                onClick={() => setShadow(!shadow)}>
                                 <img
                                     src={"http://localhost:8000/static/images/ic_shadow.png"}
                                     alt={'shadow'}
@@ -109,7 +116,9 @@ const UserCard = (props) => {
                             </button>
                         </div>
                         <div className="buttonDiv">
-                            <button onClick={() => setPurified(!purified)}>
+                            <button
+                                title='Purified'
+                                onClick={() => setPurified(!purified)}>
                                 <img
                                     src={"http://localhost:8000/static/images/ic_purified.png"}
                                     alt={'purified'}
@@ -121,7 +130,9 @@ const UserCard = (props) => {
                 }
                 { !props.record.pokemon.has_mega ? null :
                     <div className="buttonDiv">
-                        <button onClick={() => setMega(!mega)}>
+                        <button
+                            title='Mega'
+                            onClick={() => setMega(!mega)}>
                             <img
                                 src={"http://localhost:8000/static/images/ic_mega.png"}
                                 alt={'mega'}

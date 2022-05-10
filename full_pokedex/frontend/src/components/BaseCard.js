@@ -50,6 +50,7 @@ function BaseCard(props) {
                         src={'http://127.0.0.1:8000' + props.pokemon.img}
                         alt={props.pokemon.name}
                         className={data.caught ? "pokeImg" : "pokeImg greyscale"}
+                        title={props.pokemon.name}
                         onClick={() =>
                             setData(prev => ({
                                 ...data,
@@ -61,7 +62,9 @@ function BaseCard(props) {
             <div className="recordDiv">
                 { !props.pokemon.has_shiny ? null :
                     <div className="buttonDiv">
-                        <button onClick={() => setData(prev => ({
+                        <button
+                            title='Shiny'
+                            onClick={() => setData(prev => ({
                                 ...data,
                                 shiny: !data.shiny,
                             }))}
@@ -75,7 +78,9 @@ function BaseCard(props) {
                     </div>
                 }
                 <div className="buttonDiv">
-                    <button onClick={() => setData(prev => ({
+                    <button
+                        title='Lucky'
+                        onClick={() => setData(prev => ({
                                 ...data,
                                 lucky: !data.lucky,
                             }))}>
@@ -89,7 +94,9 @@ function BaseCard(props) {
                 { !props.pokemon.has_shadow ? null :
                     <>
                         <div className="buttonDiv">
-                            <button onClick={() => setData(prev => ({
+                            <button
+                                title='Shadow'
+                                onClick={() => setData(prev => ({
                                 ...data,
                                 shadow: !data.shadow,
                             }))}>
@@ -101,7 +108,9 @@ function BaseCard(props) {
                             </button>
                         </div>
                         <div className="buttonDiv">
-                            <button onClick={() => setData(prev => ({
+                            <button
+                                title='Purified'
+                                onClick={() => setData(prev => ({
                                 ...data,
                                 purified: !data.purified,
                             }))}>
@@ -116,7 +125,9 @@ function BaseCard(props) {
                 }
                 { !props.pokemon.has_mega ? null :
                     <div className="buttonDiv">
-                        <button onClick={() => setData(prev => ({
+                        <button
+                            title='Mega'
+                            onClick={() => setData(prev => ({
                                 ...data,
                                 mega: !data.mega,
                             }))}>
