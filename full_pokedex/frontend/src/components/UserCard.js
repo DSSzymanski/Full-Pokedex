@@ -12,12 +12,14 @@ import React, { useEffect, useState, useRef } from 'react';
  */
 const UserCard = (props) => {
     let [id, setId] = useState(props.record.id);
-    let [caught, setCaught] = useState(props.record.caught);
-    let [shiny, setShiny] = useState(props.record.shiny);
-    let [lucky, setLucky] = useState(props.record.lucky);
-    let [shadow, setShadow] = useState(props.record.shadow);
-    let [purified, setPurified] = useState(props.record.purified);
-    let [mega, setMega] = useState(props.record.mega);
+    let [data, setData] = useState({
+        caught: props.record.caught,
+        shiny: props.record.shiny,
+        lucky: props.record.lucky,
+        shadow: props.record.shadow,
+        purified: props.record.purified,
+        mega: props.record.mega,
+    });
     //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
 
@@ -30,15 +32,15 @@ const UserCard = (props) => {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                caught: caught,
-                shiny: shiny,
-                lucky: lucky,
-                shadow: shadow,
-                purified: purified,
-                mega: mega
+                caught: data.caught,
+                shiny: data.shiny,
+                lucky: data.lucky,
+                shadow: data.shadow,
+                purified: data.purified,
+                mega: data.mega
             })
         })
-        let data = await response.json()
+        let response_data = await response.json()
         if(response.status === 200) {
             return;
         }
@@ -55,7 +57,7 @@ const UserCard = (props) => {
         else {
             firstRender.current = false;
         }
-    }, [caught, shiny, lucky, shadow, purified, mega])
+    }, [data])
 
     //If pokemon has not been released, do not generate card.
     if(!props.record.pokemon.has_been_released) {
@@ -71,9 +73,13 @@ const UserCard = (props) => {
                     <img
                         src={'http://127.0.0.1:8000' + props.record.pokemon.img}
                         alt={props.record.pokemon.name}
-                        className={caught ? "pokeImg" : "pokeImg greyscale"}
+                        className={data.caught ? "pokeImg" : "pokeImg greyscale"}
                         title={props.record.pokemon.name}
-                        onClick={() => setCaught(!caught)}
+                        onClick={() =>
+                            setData(prev => ({
+                                ...data,
+                                caught: !data.caught,
+                        }))}
                     />
                 </div>
             </div>
@@ -82,11 +88,15 @@ const UserCard = (props) => {
                     <div className="buttonDiv">
                         <button
                             title='Shiny'
-                            onClick={() => setShiny(!shiny)}>
+                            onClick={() => setData(prev => ({
+                                ...data,
+                                shiny: !data.shiny,
+                            }))}
+                        >
                             <img
                                 src={"http://localhost:8000/static/images/shiny_icon.png"}
                                 alt={'shiny'}
-                                className={shiny ? "iconImage" : "iconImage greyscale"}
+                                className={data.shiny ? "iconImage" : "iconImage greyscale"}
                             />
                         </button>
                     </div>
@@ -94,11 +104,15 @@ const UserCard = (props) => {
                 <div className="buttonDiv">
                     <button
                         title='Lucky'
-                        onClick={() => setLucky(!lucky)}>
+                        onClick={() => setData(prev => ({
+                            ...data,
+                            lucky: !data.lucky,
+                        }))}
+                    >
                         <img
                             src={"http://localhost:8000/static/images/ui_bg_lucky_pokemon.png"}
                             alt={'lucky'}
-                            className={lucky ? "iconImage" : "iconImage greyscale"}
+                            className={data.lucky ? "iconImage" : "iconImage greyscale"}
                         />
                     </button>
                 </div>
@@ -107,22 +121,30 @@ const UserCard = (props) => {
                         <div className="buttonDiv">
                             <button
                                 title='Shadow'
-                                onClick={() => setShadow(!shadow)}>
+                                onClick={() => setData(prev => ({
+                                    ...data,
+                                    shadow: !data.shadow,
+                                }))}
+                            >
                                 <img
                                     src={"http://localhost:8000/static/images/ic_shadow.png"}
                                     alt={'shadow'}
-                                    className={shadow ? "iconImage" : "iconImage greyscale"}
+                                    className={data.shadow ? "iconImage" : "iconImage greyscale"}
                                 />
                             </button>
                         </div>
                         <div className="buttonDiv">
                             <button
                                 title='Purified'
-                                onClick={() => setPurified(!purified)}>
+                                onClick={() => setData(prev => ({
+                                    ...data,
+                                    purified: !data.purified,
+                                }))}
+                            >
                                 <img
                                     src={"http://localhost:8000/static/images/ic_purified.png"}
                                     alt={'purified'}
-                                    className={purified ? "iconImage" : "iconImage greyscale"}
+                                    className={data.purified ? "iconImage" : "iconImage greyscale"}
                                 />
                             </button>
                         </div>
@@ -132,11 +154,15 @@ const UserCard = (props) => {
                     <div className="buttonDiv">
                         <button
                             title='Mega'
-                            onClick={() => setMega(!mega)}>
+                            onClick={() => setData(prev => ({
+                                ...data,
+                                mega: !data.mega,
+                            }))}
+                        >
                             <img
                                 src={"http://localhost:8000/static/images/ic_mega.png"}
                                 alt={'mega'}
-                                className={mega ? "iconImage" : "iconImage greyscale"}
+                                className={data.mega ? "iconImage" : "iconImage greyscale"}
                             />
                         </button>
                     </div>
