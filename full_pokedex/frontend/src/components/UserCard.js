@@ -1,4 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import shiny_icon from '../icon_images/shiny_icon.png';
+import ic_mega from '../icon_images/ic_mega.png';
+import ic_shadow from '../icon_images/ic_shadow.png';
+import ic_purified from '../icon_images/ic_purified.png';
+import ui_bg_lucky_pokemon from '../icon_images/ui_bg_lucky_pokemon.png';
 /**
  * The UserCard element is a container style element that allows a signed in user to show and store data on a single Pokemon.
  * Depending on the Pokemon contained in the record object passed in through the props, the card will display the image of the 
@@ -22,13 +27,14 @@ const UserCard = (props) => {
     });
     //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
+    const addrStr = 'http://127.0.0.1:8000';
 
     /**
      * Method used for the API call to update a record in the database. Sends the data about which
      * versions have been maintained as a JSON string.
      */
     let submitRecord = async() => {
-        let response = await fetch('http://127.0.0.1:8000/api/update-record/' + id, {
+        let response = await fetch(addrStr + '/api/update-record/' + id, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -71,7 +77,7 @@ const UserCard = (props) => {
                 </div>
                 <div className="imgDiv">
                     <img
-                        src={'http://127.0.0.1:8000' + props.record.pokemon.img}
+                        src={addrStr + props.record.pokemon.img}
                         alt={props.record.pokemon.name}
                         className={data.caught ? "pokeImg" : "pokeImg greyscale"}
                         title={props.record.pokemon.name}
@@ -94,7 +100,7 @@ const UserCard = (props) => {
                             }))}
                         >
                             <img
-                                src={"http://localhost:8000/static/images/shiny_icon.png"}
+                                src={shiny_icon}
                                 alt={'shiny'}
                                 className={data.shiny ? "iconImage" : "iconImage greyscale"}
                             />
@@ -110,7 +116,7 @@ const UserCard = (props) => {
                         }))}
                     >
                         <img
-                            src={"http://localhost:8000/static/images/ui_bg_lucky_pokemon.png"}
+                            src={ui_bg_lucky_pokemon}
                             alt={'lucky'}
                             className={data.lucky ? "iconImage" : "iconImage greyscale"}
                         />
@@ -127,7 +133,7 @@ const UserCard = (props) => {
                                 }))}
                             >
                                 <img
-                                    src={"http://localhost:8000/static/images/ic_shadow.png"}
+                                    src={ic_shadow}
                                     alt={'shadow'}
                                     className={data.shadow ? "iconImage" : "iconImage greyscale"}
                                 />
@@ -142,7 +148,7 @@ const UserCard = (props) => {
                                 }))}
                             >
                                 <img
-                                    src={"http://localhost:8000/static/images/ic_purified.png"}
+                                    src={ic_purified}
                                     alt={'purified'}
                                     className={data.purified ? "iconImage" : "iconImage greyscale"}
                                 />
@@ -160,7 +166,7 @@ const UserCard = (props) => {
                             }))}
                         >
                             <img
-                                src={"http://localhost:8000/static/images/ic_mega.png"}
+                                src={ic_mega}
                                 alt={'mega'}
                                 className={data.mega ? "iconImage" : "iconImage greyscale"}
                             />

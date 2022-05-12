@@ -1,4 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import shiny_icon from '../icon_images/shiny_icon.png';
+import ic_mega from '../icon_images/ic_mega.png';
+import ic_shadow from '../icon_images/ic_shadow.png';
+import ic_purified from '../icon_images/ic_purified.png';
+import ui_bg_lucky_pokemon from '../icon_images/ui_bg_lucky_pokemon.png';
 /**
  * The BaseCard element is a container style element that allows a non-user to show and store data on a single Pokemon.
  * Depending on the Pokemon passed in through the props, the card will display the image of the pokemon, and clickable buttons
@@ -24,6 +29,7 @@ function BaseCard(props) {
     })
     //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
+    const addrStr = 'http://127.0.0.1:8000';
 
     //triggers on all button clicks and updates localStorage with data about the card
     useEffect(() => {
@@ -47,7 +53,7 @@ function BaseCard(props) {
                 </div>
                 <div className="imgDiv">
                     <img
-                        src={'http://127.0.0.1:8000' + props.pokemon.img}
+                        src={addrStr + props.pokemon.img}
                         alt={props.pokemon.name}
                         className={data.caught ? "pokeImg" : "pokeImg greyscale"}
                         title={props.pokemon.name}
@@ -70,7 +76,7 @@ function BaseCard(props) {
                             }))}
                         >
                             <img
-                                src={"http://localhost:8000/static/images/shiny_icon.png"}
+                                src={shiny_icon}
                                 alt={'shiny'}
                                 className={data.shiny ? "iconImage" : "iconImage greyscale"}
                             />
@@ -85,7 +91,7 @@ function BaseCard(props) {
                                 lucky: !data.lucky,
                             }))}>
                         <img
-                            src={"http://localhost:8000/static/images/ui_bg_lucky_pokemon.png"}
+                            src={ui_bg_lucky_pokemon}
                             alt={'lucky'}
                             className={data.lucky ? "iconImage" : "iconImage greyscale"}
                         />
@@ -101,7 +107,7 @@ function BaseCard(props) {
                                 shadow: !data.shadow,
                             }))}>
                                 <img
-                                    src={"http://localhost:8000/static/images/ic_shadow.png"}
+                                    src={ic_shadow}
                                     alt={'shadow'}
                                     className={data.shadow ? "iconImage" : "iconImage greyscale"}
                                 />
@@ -115,7 +121,7 @@ function BaseCard(props) {
                                 purified: !data.purified,
                             }))}>
                                 <img
-                                    src={"http://localhost:8000/static/images/ic_purified.png"}
+                                    src={ic_purified}
                                     alt={'purified'}
                                     className={data.purified ? "iconImage" : "iconImage greyscale"}
                                 />
@@ -132,7 +138,7 @@ function BaseCard(props) {
                                 mega: !data.mega,
                             }))}>
                             <img
-                                src={"http://localhost:8000/static/images/ic_mega.png"}
+                                src={ic_mega}
                                 alt={'mega'}
                                 className={data.mega ? "iconImage" : "iconImage greyscale"}
                             />
