@@ -27,5 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('pokedex_api.urls')),
     path('login/', index_view, name='index'),
-    re_path(r'^(?:.*)/?$', index_view, name='index'),
+    path('', index_view, name='index'),
+    path('base/', index_view, name='index'),
+    path('login/', index_view, name='index'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
