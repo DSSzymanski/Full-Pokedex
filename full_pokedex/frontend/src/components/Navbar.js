@@ -29,6 +29,9 @@ const Navbar = () => {
           </div>
         ) : (
           <div className='Navbar'>
+            <div className="pokedexLinkDiv">
+              <Link to='/base'><h6>Pokedex</h6></Link>
+            </div>
             <div className="header">
               <h6>
                 Pokedex
