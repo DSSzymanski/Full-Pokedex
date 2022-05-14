@@ -93,6 +93,7 @@ const UserCard = (props) => {
                 { !props.record.pokemon.has_shiny ? null :
                     <div className="buttonDiv">
                         <button
+                            className={data.shiny ? null : "greyscale"}
                             title='Shiny'
                             onClick={() => setData(prev => ({
                                 ...data,
@@ -102,13 +103,14 @@ const UserCard = (props) => {
                             <img
                                 src={shiny_icon}
                                 alt={'shiny'}
-                                className={data.shiny ? "iconImage" : "iconImage greyscale"}
+                                className="iconImage"
                             />
                         </button>
                     </div>
                 }
                 <div className="buttonDiv">
                     <button
+                        className={data.lucky ? null : "greyscale"}
                         title='Lucky'
                         onClick={() => setData(prev => ({
                             ...data,
@@ -118,7 +120,7 @@ const UserCard = (props) => {
                         <img
                             src={ui_bg_lucky_pokemon}
                             alt={'lucky'}
-                            className={data.lucky ? "iconImage" : "iconImage greyscale"}
+                            className="iconImage"
                         />
                     </button>
                 </div>
@@ -126,6 +128,7 @@ const UserCard = (props) => {
                     <>
                         <div className="buttonDiv">
                             <button
+                                className={data.shadow ? null : "greyscale"}
                                 title='Shadow'
                                 onClick={() => setData(prev => ({
                                     ...data,
@@ -135,12 +138,13 @@ const UserCard = (props) => {
                                 <img
                                     src={ic_shadow}
                                     alt={'shadow'}
-                                    className={data.shadow ? "iconImage" : "iconImage greyscale"}
+                                    className='iconImage'
                                 />
                             </button>
                         </div>
                         <div className="buttonDiv">
                             <button
+                                className={data.purified ? null : "greyscale"}
                                 title='Purified'
                                 onClick={() => setData(prev => ({
                                     ...data,
@@ -150,7 +154,7 @@ const UserCard = (props) => {
                                 <img
                                     src={ic_purified}
                                     alt={'purified'}
-                                    className={data.purified ? "iconImage" : "iconImage greyscale"}
+                                    className='iconImage'
                                 />
                             </button>
                         </div>
@@ -159,6 +163,7 @@ const UserCard = (props) => {
                 { !props.record.pokemon.has_mega ? null :
                     <div className="buttonDiv">
                         <button
+                            className={data.mega ? null : "greyscale"}
                             title='Mega'
                             onClick={() => setData(prev => ({
                                 ...data,
@@ -168,7 +173,7 @@ const UserCard = (props) => {
                             <img
                                 src={ic_mega}
                                 alt={'mega'}
-                                className={data.mega ? "iconImage" : "iconImage greyscale"}
+                                className='iconImage'
                             />
                         </button>
                     </div>

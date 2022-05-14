@@ -7,6 +7,28 @@ body {
   background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(2,2,253,1) 100%);
 }
 
+button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.iconImage {
+  width: 100%;
+}
+
+.pokeImg {
+  transition: filter 1.5s linear, transform .2s linear;
+}
+
+button, .pokeImg {
+  transition: filter .5s linear, transform .2s linear;
+}
+button:hover, .pokeImg:hover {
+  transform: scale(1.1);
+}
+
 .genContainer {
   display: block;
 }
@@ -19,40 +41,20 @@ body {
 
 .recordContainer {
   display: block;
-  min-width: 100px;
-  max-width: 8vw;
-  min-height: 100px;
-  max-height: 20vh;
-  padding-bottom: 40px;
+  width: 125px;
   margin: 10px;
   background-color: burlywood;
   border-radius: 10%;
 }
 
-img, .pokemonDiv{
-  width: 100%;
-  height: 100%;
+.pokeImg {
+  width: 125px;
+  height: 125px;
 }
 
 .greyscale {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-}
-
-button {
-  padding: 0;
-  height: 95%;
-  background: transparent;
-  border: none;
-}
-
-button:hover, .pokeImg:hover {
-  transform: scale(1.1);
-}
-
-.imgDiv {
-  height: 80%;
-  width: 100%;
 }
 
 .buttonDiv {
@@ -69,7 +71,6 @@ button:hover, .pokeImg:hover {
 }
 
 .pokemonDiv {
-  display: flex;
   text-align: center;
-  flex-direction: column;
+  width: 100%;
 }
