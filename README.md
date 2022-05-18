@@ -41,9 +41,9 @@ To visit project:
 `127.0.0.1:8000` in your browser.
 
 # Screenshots
-![Logged in page](#)
-![Base page](#)
-![Mobile login page](#)
+![Logged in page](https://github.com/DSSzymanski/Full-Pokedex/blob/main/full_pokedex/project_images/desktop_logged_in.png)
+![Base page](https://github.com/DSSzymanski/Full-Pokedex/blob/main/full_pokedex/project_images/desktop_base.png)
+![Mobile login page](https://github.com/DSSzymanski/Full-Pokedex/blob/main/full_pokedex/project_images/mobile_login.png)
 
 # Reflection
 This project was a side project made with the intention of being used as a tool afterwards to help track my progress in Pokemon Go. While it wouldn't be hard to create a spreadsheet to track everything, this project allows a visual representation so it's easier to find and track the data compared to a spread sheet.
