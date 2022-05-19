@@ -53,3 +53,6 @@ My goal for this project was to develop skills in combining multiple toolsets to
 Another unexpected issue I wasn't expecting was some debugging issues. While I was eventually able to figure out what the issues were, some of the error messages weren't entirely helpful and required a bit of research to solve.
 
 The total list of tools that I used in this were React, React-router-dom v. 6.3, jwt-decode, Django, djangorestframework, djangorestframework-simplejwt, django-cors-headers, JSX, and some vanilla JS and CSS.
+
+# Disclaimer
+Pokémon is Copyright Gamefreak, Nintendo and The Pokémon Company 2001-2022. All images and names owned and trademarked by Gamefreak, Nintendo, The Pokémon Company, and Niantic are property of their respective owners.
