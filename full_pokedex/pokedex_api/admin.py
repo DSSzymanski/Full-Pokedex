@@ -8,7 +8,6 @@ class PokemonAdmin(admin.ModelAdmin):
     """
     Admin for the Pokemon Model.
     Basic view showing all pokemon.
-    Creates new record for all users upon creation.
     """
     list_display = ('id', 'name', 'generation', 'img')
     list_filter = ['generation']
@@ -16,10 +15,13 @@ class PokemonAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
     def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
-        users = User.objects.all()
-        for user in users:
-            Record.objects.create(owner=user, pokemon=obj)
+        if not Pokemon.objects.filter(pk=obj.pk).exists():
+            super().save_model(request, obj, form, change)
+            users = User.objects.all()
+            for user in users:
+                Record.objects.create(owner=user, pokemon=obj)
+        else:
+            super().save_model(request, obj, form, change)
 
 @admin.register(Record)
 class RecordAdmin(admin.ModelAdmin):
