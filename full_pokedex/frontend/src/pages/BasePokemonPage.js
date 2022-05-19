@@ -49,7 +49,7 @@ const BasePokemonPage = () => {
   }
 
   return(
-    <div className="container">
+    <div className="container mainContainer">
     {
       genList.map((gen, index) => {
         return(

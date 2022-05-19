@@ -41,16 +41,18 @@ const UserPokemonPage = () => {
     else {
       logoutUser();
     }
+    console.log(data.at(-1))
     let numGens = data.at(-1).pokemon.generation;
     let newGenList = [];
     for(let i = 1; i <= numGens; i++) {
       newGenList.push(i);
+      console.log(i);
     }
     setGenList(newGenList);
   }
 
   return(
-    <div className="container">
+    <div className="container mainContainer">
     {
       genList.map((gen, index) => {
         return(
