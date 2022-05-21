@@ -41,12 +41,13 @@ const UserPokemonPage = () => {
     else {
       logoutUser();
     }
-    console.log(data.at(-1))
-    let numGens = data.at(-1).pokemon.generation;
+    let numGens = 0;
+    data.forEach((record) => {
+      numGens = Math.max(numGens, record.pokemon.generation);
+    })
     let newGenList = [];
     for(let i = 1; i <= numGens; i++) {
       newGenList.push(i);
-      console.log(i);
     }
     setGenList(newGenList);
   }

@@ -40,7 +40,10 @@ const BasePokemonPage = () => {
       alert("Error retrieving pokemon list from server.")
       return;
     }
-    let numGens = data.at(-1).generation;
+    let numGens = 0;
+    data.forEach((pokemon) => {
+      numGens = Math.max(numGens, pokemon.generation);
+    })
     let newGenList = [];
     for(let i = 1; i <= numGens; i++) {
       newGenList.push(i);
