@@ -40,6 +40,15 @@ To visit project:
 
 `127.0.0.1:8000` in your browser.
 
+# Updating the Database
+To perform any updates to the Pokemon database, create a super user account by navigating to the directory where the project is saved and navigating to the Full_Pokedex folder. Once there, run:
+
+`python manage.py createsuperuser`
+
+and follow the prompts to create an account. Once the account is created, open your web browser and go to `127.0.0.1:8000/admin` and sign in using the credentials used to make your super user account.
+
+Once signed in, go to Pokemons under Pokedex_API and click either add or change. Going into change allows you to update the current types of a Pokemon that can be encountered, (ie add shadow or mega forms).
+
 # Screenshots
 ![Logged in page](https://github.com/DSSzymanski/Full-Pokedex/blob/main/full_pokedex/project_images/desktop_logged_in.png)
 ![Base page](https://github.com/DSSzymanski/Full-Pokedex/blob/main/full_pokedex/project_images/desktop_base.png)
