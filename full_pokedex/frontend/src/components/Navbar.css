@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
     background: rgb(101,100,100);
-    background: linear-gradient(0deg, rgba(101,100,100,0) 0%, rgba(78,78,78,0.8631827731092436) 10%, rgba(34,34,34,1) 100%);
+    background: linear-gradient(0deg, rgba(78,78,78,0.8631827731092436) 10%, rgba(34,34,34,1) 100%);
     color: white;
     font-size: 18px;
+    height: 70px;
 }
 
 .pokedexLinkDiv {
@@ -13,10 +14,27 @@
     margin-left: 5vw;
 }
 
-.logoutDiv {
+.menu-icon {
     position: absolute;
     right: 0;
     margin-right: 5vw;
+}
+
+.sidebar-hide {
+    display: none;
+}
+
+.sidebar-show {
+    position: absolute;
+    background: rgba(78,78,78,0.8631827731092436);
+    right: 0;
+    top: 70px;
+    width: 15vw;
+    z-index: 1;
+}
+
+.pad-btn {
+    padding: 5px;
 }
 
 a {

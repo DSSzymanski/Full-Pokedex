@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
 import AuthContext from '../context/AuthContext';
@@ -12,7 +12,12 @@ import AuthContext from '../context/AuthContext';
 
 const Navbar = () => {
   let { user, logoutUser } = useContext(AuthContext);
+  let [ open, setOpen ] = useState(false);
   
+  const handleClick = () => {
+    setOpen(!open);
+  }
+
   return (
     <>
       {
@@ -23,8 +28,13 @@ const Navbar = () => {
                 {user.username}'s Pokedex
               </h6>
             </div>
-            <div className="logoutDiv">
-              <h6 onClick={ logoutUser }>Logout</h6>
+            <div className="menu-icon" onClick={handleClick}>
+              <i className={open ? 'fas fa-times' : 'fas fa-bars'}></i>
+            </div>
+            <div className={open ? "sidebar-show" : "sidebar-hide"}>
+              <div className="logoutDiv">
+                <Link to='/login'><h6>Log In | Sign Up</h6></Link>
+              </div>
             </div>
           </div>
         ) : (
@@ -37,8 +47,15 @@ const Navbar = () => {
                 Pokedex
               </h6>
             </div>
-            <div className="logoutDiv">
-              <Link to='/login'><h6>Log In | Sign Up</h6></Link>
+            <div className="menu-icon" onClick={handleClick}>
+              <h6>
+                <i className={open ? 'fas fa-times' : 'fas fa-bars'}></i>
+              </h6>
+            </div>
+            <div className={open ? "sidebar-show" : "sidebar-hide"}>
+              <div className="logoutDiv">
+                <Link to='/login' className='pad-btn'><h6>Log In | Sign Up</h6></Link>
+              </div>
             </div>
           </div>
           )
