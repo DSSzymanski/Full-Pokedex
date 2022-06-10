@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
+import Sidebar from './Sidebar';
 import AuthContext from '../context/AuthContext';
 
 /**
@@ -11,7 +12,7 @@ import AuthContext from '../context/AuthContext';
  */
 
 const Navbar = () => {
-  let { user, logoutUser } = useContext(AuthContext);
+  let { user } = useContext(AuthContext);
   let [ open, setOpen ] = useState(false);
   
   const handleClick = () => {
@@ -21,44 +22,24 @@ const Navbar = () => {
   return (
     <>
       {
-        user ? (
-          <div className='Navbar'>
-            <div className="header">
-              <h6>
-                {user.username}'s Pokedex
-              </h6>
-            </div>
-            <div className="menu-icon" onClick={handleClick}>
+        <div className='Navbar'>
+          <div className="pokedexLinkDiv">
+            <Link to='/base'><h6>Pokedex</h6></Link>
+          </div>
+          <div className="header">
+            <h6>
+              {user ? user.username + '\'s Pokedex' : 'Pokedex'}
+            </h6>
+          </div>
+          <div className="menu-icon" onClick={handleClick}>
+            <h6>
               <i className={open ? 'fas fa-times' : 'fas fa-bars'}></i>
-            </div>
-            <div className={open ? "sidebar-show" : "sidebar-hide"}>
-              <div className="logoutDiv">
-                <Link to='/login'><h6>Log In | Sign Up</h6></Link>
-              </div>
-            </div>
+            </h6>
           </div>
-        ) : (
-          <div className='Navbar'>
-            <div className="pokedexLinkDiv">
-              <Link to='/base'><h6>Pokedex</h6></Link>
-            </div>
-            <div className="header">
-              <h6>
-                Pokedex
-              </h6>
-            </div>
-            <div className="menu-icon" onClick={handleClick}>
-              <h6>
-                <i className={open ? 'fas fa-times' : 'fas fa-bars'}></i>
-              </h6>
-            </div>
-            <div className={open ? "sidebar-show" : "sidebar-hide"}>
-              <div className="logoutDiv">
-                <Link to='/login' className='pad-btn'><h6>Log In | Sign Up</h6></Link>
-              </div>
-            </div>
+          <div className={open ? "sidebar-show" : "sidebar-hide"}>
+            <Sidebar />
           </div>
-          )
+        </div>
       }
     </>
   )
