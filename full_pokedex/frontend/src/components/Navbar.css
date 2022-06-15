@@ -33,8 +33,34 @@
     z-index: 1;
 }
 
-.pad-btn {
-    padding: 5px;
+.filter-div{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.filter-header, .btn-div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.filter-container {
+    width: 100%;
+}
+
+.filter-item {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.filter-header {
+    width: 80%;
+    border-bottom: 1px solid white;
+}
+
+.submit-btn {
+    color: white;
+    border: 1px solid white;
 }
 
 a {
