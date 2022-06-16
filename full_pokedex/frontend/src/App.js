@@ -8,49 +8,52 @@ import AuthContext from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BasePokemonPage from './pages/BasePokemonPage';
+import { FilterProvider } from './context/FilterContext';
 
 class App extends React.Component {
   render(){
     return (
       <>
         <AuthProvider>
-          <Routes>
-            <Route
-              path='/login'
-              element={
-                <>
-                  <Navbar />
-                  <LoggedInRedirect>
-                    <LoginPage />
-                  </LoggedInRedirect>
+          <FilterProvider>
+            <Routes>
+              <Route
+                path='/login'
+                element={
+                  <>
+                    <Navbar />
+                    <LoggedInRedirect>
+                      <LoginPage />
+                    </LoggedInRedirect>
 
-                </>
-              }
-            />
-            <Route
-              path="/base"
-              element={
-                <>
-                  <Navbar />
-                  <LoggedInRedirect>
-                    <BasePokemonPage />
-                  </LoggedInRedirect>
-                </>
-              }
-            />
-            <Route
-              exact 
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <PrivateRoute>
-                    <UserPokemonPage />
-                  </PrivateRoute>
-                </>
-              }
-            />
-          </Routes>
+                  </>
+                }
+              />
+              <Route
+                path="/base"
+                element={
+                  <>
+                    <Navbar />
+                    <LoggedInRedirect>
+                      <BasePokemonPage />
+                    </LoggedInRedirect>
+                  </>
+                }
+              />
+              <Route
+                exact 
+                path="/"
+                element={
+                  <>
+                    <Navbar />
+                    <PrivateRoute>
+                      <UserPokemonPage />
+                    </PrivateRoute>
+                  </>
+                }
+              />
+            </Routes>
+          </FilterProvider>
         </AuthProvider>
         <Footer />
       </>
