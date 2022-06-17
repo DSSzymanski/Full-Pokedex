@@ -8,9 +8,30 @@ const Sidebar = () => {
   let { user, logoutUser } = useContext(AuthContext);
   let { filterData } = useContext(FilterContext);
 
+  /**
+   * Iterates through the radio button groups and creates
+   * an object containing that data. Then passes the data
+   * through to the filter context to update filter.
+   */
   let submitFilter = () => {
-    console.log(filterData);
-    console.log(filterData['caught'])
+    let data = {}
+    let radioNames = [
+      "caught",
+      "shiny",
+      "lucky",
+      "shadow",
+      "purified",
+      "mega"
+    ]
+
+    for (const name of radioNames) {
+      let radioBtns = document.getElementsByName(name);
+      for (const ele of radioBtns){
+        if(ele.checked) {
+          data[name] = ele.value;
+        }
+      }
+    }
   }
 
   return (
