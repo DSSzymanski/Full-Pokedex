@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const FilterContext = createContext();
 
@@ -18,8 +18,18 @@ export const FilterProvider = ({ children }) => {
         mega: ANY,
     })
 
+    let updateFilter = ( data ) => {
+        setFilterData(data);
+    }
+
+    useEffect(() => {},[filterData])
+
     let contextData = {
         filterData: filterData,
+        updateFilter: updateFilter,
+        ANY: ANY,
+        TRUE: TRUE,
+        FALSE: FALSE,
     }
 
     return (

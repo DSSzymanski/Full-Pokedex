@@ -6,7 +6,7 @@ import FilterContext from '../context/FilterContext';
 
 const Sidebar = () => {
   let { user, logoutUser } = useContext(AuthContext);
-  let { filterData } = useContext(FilterContext);
+  let { filterData, updateFilter, ANY, TRUE, FALSE } = useContext(FilterContext);
 
   /**
    * Iterates through the radio button groups and creates
@@ -28,10 +28,20 @@ const Sidebar = () => {
       let radioBtns = document.getElementsByName(name);
       for (const ele of radioBtns){
         if(ele.checked) {
-          data[name] = ele.value;
+          if( ele.value === "any") {
+            data[name] = ANY;
+          }
+          else if( ele.value === "true") {
+            data[name] = TRUE;
+          }
+          else if( ele.value === "false") {
+            data[name] = FALSE;
+          }
         }
       }
     }
+
+    updateFilter(data);
   }
 
   return (
@@ -89,7 +99,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 1 ?
+              filterData['shiny'] === 1 ?
               <input type="radio" name="shiny" id="shiny-true" value="true" defaultChecked/> :
               <input type="radio" name="shiny" id="shiny-true" value="true"/> 
             }
@@ -97,7 +107,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === -1 ?
+              filterData['shiny'] === -1 ?
               <input type="radio" name="shiny" id="shiny-false" value="false" defaultChecked/> :
               <input type="radio" name="shiny" id="shiny-false" value="false"/>
             }
@@ -105,7 +115,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 0 ?
+              filterData['shiny'] === 0 ?
               <input type="radio" name="shiny" id="shiny-any" value="any" defaultChecked/> :
               <input type="radio" name="shiny" id="shiny-any" value="any"/>
             }
@@ -118,7 +128,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 1 ?
+              filterData['lucky'] === 1 ?
               <input type="radio" name="lucky" id="lucky-true" value="true" defaultChecked/> :
               <input type="radio" name="lucky" id="lucky-true" value="true"/>
             }
@@ -126,7 +136,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === -1 ?
+              filterData['lucky'] === -1 ?
               <input type="radio" name="lucky" id="lucky-false" value="false" defaultChecked/> :
               <input type="radio" name="lucky" id="lucky-false" value="false"/>
             }
@@ -134,7 +144,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 0 ?
+              filterData['lucky'] === 0 ?
               <input type="radio" name="lucky" id="lucky-any" value="any" defaultChecked/> :
               <input type="radio" name="lucky" id="lucky-any" value="any"/>
             }
@@ -147,7 +157,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 1 ?
+              filterData['shadow'] === 1 ?
               <input type="radio" name="shadow" id="shadow-true" value="true" defaultChecked/> :
               <input type="radio" name="shadow" id="shadow-true" value="true"/>
             }
@@ -155,7 +165,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === -1 ?
+              filterData['shadow'] === -1 ?
               <input type="radio" name="shadow" id="shadow-false" value="false" defaultChecked/> :
               <input type="radio" name="shadow" id="shadow-false" value="false"/>
             }
@@ -163,7 +173,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 0 ?
+              filterData['shadow'] === 0 ?
               <input type="radio" name="shadow" id="shadow-any" value="any" defaultChecked/> :
               <input type="radio" name="shadow" id="shadow-any" value="any"/>
             }
@@ -176,7 +186,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 1 ?
+              filterData['purified'] === 1 ?
               <input type="radio" name="purified" id="purified-true" value="true" defaultChecked/> :
               <input type="radio" name="purified" id="purified-true" value="true"/>
             }
@@ -184,7 +194,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === -1 ?
+              filterData['purified'] === -1 ?
               <input type="radio" name="purified" id="purified-false" value="false" defaultChecked/> :
               <input type="radio" name="purified" id="purified-false" value="false"/>
             }
@@ -192,7 +202,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 0 ?
+              filterData['purified'] === 0 ?
               <input type="radio" name="purified" id="purified-any" value="any" defaultChecked/> :
               <input type="radio" name="purified" id="purified-any" value="any"/>
             }
@@ -205,7 +215,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 1 ?
+              filterData['mega'] === 1 ?
               <input type="radio" name="mega" id="mega-true" value="true" defaultChecked/> :
               <input type="radio" name="mega" id="mega-true" value="true"/>
             }
@@ -213,7 +223,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === -1 ?
+              filterData['mega'] === -1 ?
               <input type="radio" name="mega" id="mega-false" value="false" defaultChecked/> :
               <input type="radio" name="mega" id="mega-false" value="false"/>
             }
@@ -221,7 +231,7 @@ const Sidebar = () => {
           </div>
           <div className="filter-item">
             {
-              filterData['caught'] === 0 ?
+              filterData['mega'] === 0 ?
               <input type="radio" name="mega" id="mega-any" value="any" defaultChecked/> :
               <input type="radio" name="mega" id="mega-any" value="any"/>
             }
