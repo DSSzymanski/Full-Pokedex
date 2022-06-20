@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import shiny_icon from '../icon_images/shiny_icon.png';
 import ic_mega from '../icon_images/ic_mega.png';
 import ic_shadow from '../icon_images/ic_shadow.png';
 import ic_purified from '../icon_images/ic_purified.png';
 import ui_bg_lucky_pokemon from '../icon_images/ui_bg_lucky_pokemon.png';
+import FilterContext from '../context/FilterContext';
 /**
  * The UserCard element is a container style element that allows a signed in user to show and store data on a single Pokemon.
  * Depending on the Pokemon contained in the record object passed in through the props, the card will display the image of the 
@@ -28,6 +29,7 @@ const UserCard = (props) => {
     //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
     const addrStr = 'http://127.0.0.1:8000';
+    let { validatePokemon } = useContext(FilterContext);
 
     /**
      * Method used for the API call to update a record in the database. Sends the data about which
@@ -66,7 +68,7 @@ const UserCard = (props) => {
     }, [data])
 
     //If pokemon has not been released, do not generate card.
-    if(!props.record.pokemon.has_been_released) {
+    if(!props.record.pokemon.has_been_released || !validatePokemon(data)) {
         return null;
     }
     return(

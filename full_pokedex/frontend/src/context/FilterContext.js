@@ -5,9 +5,9 @@ const FilterContext = createContext();
 export default FilterContext;
 
 export const FilterProvider = ({ children }) => {
-    const ANY = 0;
-    const TRUE = 1;
-    const FALSE = -1;
+    const ANY = "any";
+    const TRUE = true;
+    const FALSE = false;
 
     let [ filterData, setFilterData ] = useState({
         caught: ANY,
@@ -22,11 +22,23 @@ export const FilterProvider = ({ children }) => {
         setFilterData(data);
     }
 
+    let validatePokemon = ( recordData ) => {
+        for ( const key in filterData ) {
+            //skip any checks
+            if ( filterData[key] === ANY ) { continue; }
+            if ( filterData[key] !== recordData[key]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     useEffect(() => {},[filterData])
 
     let contextData = {
         filterData: filterData,
         updateFilter: updateFilter,
+        validatePokemon: validatePokemon,
         ANY: ANY,
         TRUE: TRUE,
         FALSE: FALSE,
