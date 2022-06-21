@@ -16,17 +16,23 @@ export const FilterProvider = ({ children }) => {
         shadow: ANY,
         purified: ANY,
         mega: ANY,
+        generation: ANY,
     })
 
     let updateFilter = ( data ) => {
         setFilterData(data);
     }
 
-    let validatePokemon = ( recordData ) => {
+    let validatePokemon = ( pokemon, recordData ) => {
         for ( const key in filterData ) {
             //skip any checks
             if ( filterData[key] === ANY ) { continue; }
-            if ( filterData[key] !== recordData[key]) {
+            if ( key === 'generation' ) {
+                if ( parseInt(filterData[key]) !== pokemon.generation ) {
+                    return false;
+                }
+            }
+            else if ( filterData[key] !== recordData[key]) {
                 return false;
             }
         }

@@ -24,6 +24,9 @@ const Sidebar = () => {
       "mega"
     ]
 
+    data['generation'] = document.getElementById('genDropdown').value;
+
+    //add radio buttons
     for (const name of radioNames) {
       let radioBtns = document.getElementsByName(name);
       for (const ele of radioBtns){
@@ -64,6 +67,20 @@ const Sidebar = () => {
         <h5 className="filter-header">
           Filter
         </h5>
+        <div className="filter-container">
+          <label htmlFor="generation">Generation: </label>
+          <select name="generation" id="genDropdown" defaultValue={filterData['generation']}>
+            <option value={ANY}>Any</option>
+            <option value="1">I</option>
+            <option value="2">II</option>
+            <option value="3">III</option>
+            <option value="4">IV</option>
+            <option value="5">V</option>
+            <option value="6">VI</option>
+            <option value="7">VII</option>
+            <option value="8">VIII</option>
+          </select>
+        </div>
         <div className="filter-container">
           <div>
             Caught

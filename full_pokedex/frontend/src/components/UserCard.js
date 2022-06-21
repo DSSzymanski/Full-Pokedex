@@ -68,7 +68,7 @@ const UserCard = (props) => {
     }, [data])
 
     //If pokemon has not been released, do not generate card.
-    if(!props.record.pokemon.has_been_released || !validatePokemon(data)) {
+    if(!props.record.pokemon.has_been_released || !validatePokemon( props.record.pokemon, data)) {
         return null;
     }
     return(
