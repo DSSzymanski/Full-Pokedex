@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import AuthContext from '../context/AuthContext';
 import UserCard from '../components/UserCard'
+import FilterContext from '../context/FilterContext';
 
 /**
  * Pokemon page element for users. Displays a container filled with records
@@ -16,6 +17,7 @@ const UserPokemonPage = () => {
   //state holds list of pokemon generations used to separate the page
   let [genList, setGenList] = useState([]);
   let { authTokens, logoutUser } = useContext(AuthContext);
+  let { filterData, ANY } = useContext(FilterContext);
 
   useEffect(() => {
     getRecordDataFromAPI();
@@ -56,23 +58,25 @@ const UserPokemonPage = () => {
     <div className="container mainContainer">
     {
       genList.map((gen, index) => {
-        return(
-          <div key={index} className="genContainer">
-            <h1 className="genHeader">
-              Generation {gen}
-            </h1>
-            <div className="pokemonContainer">
-              {recordList.map((record, index2) => {
-                if(record.pokemon.generation === gen){
-                  return(
-                    <UserCard key={index2} record={record} pokemon={record.pokemon} />
-                  )
-                }
-                else{return null;}
-              })}
+        if ( filterData['generation'] === ANY || parseInt(filterData['generation']) === gen){
+          return(
+            <div key={index} className="genContainer">
+              <h1 className="genHeader">
+                Generation {gen}
+              </h1>
+              <div className="pokemonContainer">
+                {recordList.map((record, index2) => {
+                  if(record.pokemon.generation === gen){
+                    return(
+                      <UserCard key={index2} record={record} pokemon={record.pokemon} />
+                    )
+                  }
+                  else{return null;}
+                })}
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
       })
     }
     </div>
