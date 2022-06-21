@@ -29,7 +29,7 @@
     background: rgba(78,78,78,0.8631827731092436);
     right: 0;
     top: 70px;
-    width: 15vw;
+    width: 250px;
     z-index: 1;
 }
 
@@ -61,6 +61,7 @@
 .submit-btn {
     color: white;
     border: 1px solid white;
+    margin-bottom: 10px;
 }
 
 a {
