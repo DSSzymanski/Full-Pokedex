@@ -39,13 +39,14 @@
     flex-direction: column;
 }
 
-.filter-header, .btn-div {
+.btn-div {
     margin-left: auto;
     margin-right: auto;
 }
 
 .filter-container {
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .filter-item {
@@ -56,6 +57,7 @@
 .filter-header {
     width: 80%;
     border-bottom: 1px solid white;
+    margin: 20px auto;
 }
 
 .submit-btn {
@@ -64,7 +66,38 @@
     margin-bottom: 10px;
 }
 
+.logoutDiv {
+    margin-top: 10px;
+}
+
 a {
     color: white;
     text-decoration: none;
+}
+
+@media screen and (max-width: 960px) {
+    .sidebar-show {
+        width: 100%;
+    }
+
+    .filter-header {
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        margin: 0 auto;
+        margin-top: 10px;
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    .filter-container {
+        margin-top: 10px;
+        margin-bottom: 0px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid white;
+    }
+
+    .radio-button-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
