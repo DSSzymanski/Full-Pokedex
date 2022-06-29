@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import BaseCard from '../components/BaseCard'
+import React, { useState, useEffect, useContext } from 'react';
+import BaseCard from '../components/BaseCard';
+import FilterContext from '../context/FilterContext';
 
 /**
  * Base page element for non-users. Displays a container filled with records
@@ -15,6 +16,7 @@ const BasePokemonPage = () => {
   //state for how many generations of pokemon there are
   //used for the page separators
   let [genList, setGenList] = useState([]);
+  let { filterData, ANY } = useContext(FilterContext);
 
   useEffect(() => {
     getPokemonDataFromAPI();
@@ -55,23 +57,25 @@ const BasePokemonPage = () => {
     <div className="container mainContainer">
     {
       genList.map((gen, index) => {
-        return(
-          <div key={index} className="genContainer">
-            <h1 className="genHeader">
-              Generation {gen}
-            </h1>
-            <div className="pokemonContainer">
-              {pokemonList.map((pokemon, index2) => {
-                if(pokemon.generation === gen){
-                  return(
-                    <BaseCard key={index2} pokemon={pokemon} />
-                  )
-                }
-                else{return null;}
-              })}
+        if ( filterData['generation'] === ANY || parseInt(filterData['generation']) === gen){
+          return(
+            <div key={index} className="genContainer">
+              <h1 className="genHeader">
+                Generation {gen}
+              </h1>
+              <div className="pokemonContainer">
+                {pokemonList.map((pokemon, index2) => {
+                  if(pokemon.generation === gen){
+                    return(
+                      <BaseCard key={index2} pokemon={pokemon} />
+                    )
+                  }
+                  else{return null;}
+                })}
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
       })
     }
     </div>
