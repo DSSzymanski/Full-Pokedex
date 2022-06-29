@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
     background: rgb(101,100,100);
-    background: linear-gradient(0deg, rgba(101,100,100,0) 0%, rgba(78,78,78,0.8631827731092436) 10%, rgba(34,34,34,1) 100%);
+    background: linear-gradient(0deg, rgba(78,78,78,0.8631827731092436) 10%, rgba(34,34,34,1) 100%);
     color: white;
     font-size: 18px;
+    height: 70px;
 }
 
 .pokedexLinkDiv {
@@ -13,13 +14,90 @@
     margin-left: 5vw;
 }
 
-.logoutDiv {
+.menu-icon {
     position: absolute;
     right: 0;
     margin-right: 5vw;
 }
 
+.sidebar-hide {
+    display: none;
+}
+
+.sidebar-show {
+    position: absolute;
+    background: rgba(78,78,78,0.8631827731092436);
+    right: 0;
+    top: 70px;
+    width: 250px;
+    z-index: 1;
+}
+
+.filter-div{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.btn-div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.filter-container {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.filter-item {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.filter-header {
+    width: 80%;
+    border-bottom: 1px solid white;
+    margin: 20px auto;
+}
+
+.submit-btn {
+    color: white;
+    border: 1px solid white;
+    margin-bottom: 10px;
+}
+
+.logoutDiv {
+    margin-top: 10px;
+}
+
 a {
     color: white;
     text-decoration: none;
+}
+
+@media screen and (max-width: 960px) {
+    .sidebar-show {
+        width: 100%;
+    }
+
+    .filter-header {
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        margin: 0 auto;
+        margin-top: 10px;
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    .filter-container {
+        margin-top: 10px;
+        margin-bottom: 0px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid white;
+    }
+
+    .radio-button-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
