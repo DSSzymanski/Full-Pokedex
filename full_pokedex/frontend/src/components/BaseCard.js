@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
-import shiny_icon from '../icon_images/shiny_icon.png';
-import ic_mega from '../icon_images/ic_mega.png';
-import ic_shadow from '../icon_images/ic_shadow.png';
-import ic_purified from '../icon_images/ic_purified.png';
-import ui_bg_lucky_pokemon from '../icon_images/ui_bg_lucky_pokemon.png';
 import FilterContext from '../context/FilterContext';
+import Record from './Record';
+
 /**
  * The BaseCard element is a container style element that allows a non-user to show and store data on a single Pokemon.
  * Depending on the Pokemon passed in through the props, the card will display the image of the pokemon, and clickable buttons
@@ -67,92 +64,7 @@ function BaseCard(props) {
                     />
                 </div>
             </div>
-            <div className="recordDiv">
-                { !props.pokemon.has_shiny ? null :
-                    <div className="buttonDiv">
-                        <button
-                            className={data.shiny ? null : "greyscale"}
-                            title='Shiny'
-                            onClick={() => setData(prev => ({
-                                ...data,
-                                shiny: !data.shiny,
-                            }))}
-                        >
-                            <img
-                                src={shiny_icon}
-                                alt={'shiny'}
-                                className="iconImage"
-                            />
-                        </button>
-                    </div>
-                }
-                <div className="buttonDiv">
-                    <button
-                        className={data.lucky ? null : "greyscale"}
-                        title='Lucky'
-                        onClick={() => setData(prev => ({
-                                ...data,
-                                lucky: !data.lucky,
-                            }))}>
-                        <img
-                            src={ui_bg_lucky_pokemon}
-                            alt={'lucky'}
-                            className="iconImage"
-                        />
-                    </button>
-                </div>
-                { !props.pokemon.has_shadow ? null :
-                    <>
-                        <div className="buttonDiv">
-                            <button
-                                className={data.shadow ? null : "greyscale"}
-                                title='Shadow'
-                                onClick={() => setData(prev => ({
-                                ...data,
-                                shadow: !data.shadow,
-                            }))}>
-                                <img
-                                    src={ic_shadow}
-                                    alt={'shadow'}
-                                    className="iconImage"
-                                />
-                            </button>
-                        </div>
-                        <div className="buttonDiv">
-                            <button
-                                className={data.purified ? null : "greyscale"}
-                                title='Purified'
-                                onClick={() => setData(prev => ({
-                                ...data,
-                                purified: !data.purified,
-                            }))}>
-                                <img
-                                    src={ic_purified}
-                                    alt={'purified'}
-                                    className="iconImage"
-                                />
-                            </button>
-                        </div>
-                    </>
-                }
-                { !props.pokemon.has_mega ? null :
-                    <div className="buttonDiv">
-                        <button
-                            className={data.mega ? null : "greyscale"}
-                            title='Mega'
-                            onClick={() => setData(prev => ({
-                                ...data,
-                                mega: !data.mega,
-                            }))}>
-                            <img
-                                src={ic_mega}
-                                alt={'mega'}
-                                className="iconImage"
-                            />
-                        </button>
-                    </div>
-                }
-            </div>
+            <Record pokemon={props.pokemon} data={data} setData={setData}/>
         </div>
     )
 }
