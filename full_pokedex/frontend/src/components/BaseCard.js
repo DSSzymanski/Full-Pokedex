@@ -15,28 +15,77 @@ import Record from './Record';
  */
 function BaseCard(props) {
     //Load data object from local storage or set a default object if there is no matching key.
-    let [data, setData] = useState(() =>
-        localStorage.getItem(props.pokemon.id + "Record") ? JSON.parse(localStorage.getItem(props.pokemon.id + "Record")) :
-    {
-        caught: false,
-        shiny: false,
-        lucky: false,
-        shadow: false,
-        purified: false,
-        mega: false,
-    })
+    let [data, setData] = useState({})
     //used so initialization of data objects doesn't trigger useEffect
     let firstRender = useRef(true);
     const addrStr = 'http://127.0.0.1:8000';
     let { validatePokemon } = useContext(FilterContext);
 
-    //triggers on all button clicks and updates localStorage with data about the card
-    useEffect(() => {
-        if (!firstRender.current) {
-            localStorage.setItem(props.pokemon.id + "Record", JSON.stringify(data));
+    let submitRecord = async() => {
+        let response = await fetch(addrStr + '/api/update-record/' + props.record.id, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                caught: data.caught,
+                shiny: data.shiny,
+                lucky: data.lucky,
+                shadow: data.shadow,
+                purified: data.purified,
+                mega: data.mega
+            })
+        })
+        let response_data = await response.json()
+        if(response.status === 200) {
+            return;
         }
+        else{
+            alert(response.statusText);
+        }
+    }
+
+    //handles loading and altering of data for cards/database
+    useEffect(() => {
+        //user card functionality
+        if ( props.is_user_account ) {
+            //initial data load
+            if ( !props.record ) {
+                alert("Page error, no record found to display.")
+            }
+            if ( firstRender.current ) {
+                setData({
+                    caught: props.record.caught,
+                    shiny: props.record.shiny,
+                    lucky: props.record.lucky,
+                    shadow: props.record.shadow,
+                    purified: props.record.purified,
+                    mega: props.record.mega,
+                })
+                firstRender.current = false;
+            }
+            //update data on user click
+            else {
+                submitRecord();
+            }
+        }
+        //non-user card functionality
         else {
-            firstRender.current = false;
+            //initial data load
+            if ( firstRender.current ) {
+                setData(localStorage.getItem(props.pokemon.id + "Record") ? JSON.parse(localStorage.getItem(props.pokemon.id + "Record")) :
+                {
+                    caught: false,
+                    shiny: false,
+                    lucky: false,
+                    shadow: false,
+                    purified: false,
+                    mega: false,
+                });
+                firstRender.current = false;
+            }
+            //update local storage on user click
+            else {
+                localStorage.setItem(props.pokemon.id + "Record", JSON.stringify(data));
+            }
         }
     }, [data])
 
