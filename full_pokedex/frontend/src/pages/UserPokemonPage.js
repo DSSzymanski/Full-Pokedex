@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import AuthContext from '../context/AuthContext';
-import BaseCard from '../components/UserCard'
+import Card from '../components/Card'
 import FilterContext from '../context/FilterContext';
 
 /**
@@ -68,7 +68,7 @@ const UserPokemonPage = () => {
                 {recordList.map((record, index2) => {
                   if(record.pokemon.generation === gen){
                     return(
-                      <BaseCard key={index2} record={record} is_user_account={true} pokemon={record.pokemon} />
+                      <Card key={index2} record={record} is_user_account={true} pokemon={record.pokemon} />
                     )
                   }
                   else{return null;}
