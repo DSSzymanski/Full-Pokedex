@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import BaseCard from '../components/BaseCard';
+import Card from '../components/Card';
 import FilterContext from '../context/FilterContext';
 
 /**
@@ -67,7 +67,7 @@ const BasePokemonPage = () => {
                 {pokemonList.map((pokemon, index2) => {
                   if(pokemon.generation === gen){
                     return(
-                      <BaseCard key={index2} pokemon={pokemon} />
+                      <Card key={index2} pokemon={pokemon} />
                     )
                   }
                   else{return null;}
