@@ -24,17 +24,17 @@ const Navbar = () => {
       {
         <div className='Navbar'>
           <div className="pokedexLinkDiv">
-            <Link to='/base'><h6>Pokedex</h6></Link>
+            <Link to='/base'><h5>Pokedex</h5></Link>
           </div>
           <div className="header">
-            <h6>
-              {user ? user.username + '\'s Pokedex' : 'Pokedex'}
-            </h6>
+            <h5>
+              {user ? user.username + '\'s Pokedex' : 'Non-account Pokedex'}
+            </h5>
           </div>
           <div className="menu-icon" onClick={handleClick}>
-            <h6>
+            <h5>
               <i className={open ? 'fas fa-times' : 'fas fa-bars'}></i>
-            </h6>
+            </h5>
           </div>
           <div className={open ? "sidebar-show" : "sidebar-hide"}>
             <Sidebar />

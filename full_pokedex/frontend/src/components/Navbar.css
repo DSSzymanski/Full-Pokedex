@@ -1,11 +1,16 @@
 .Navbar {
     display: flex;
     justify-content: center;
+    align-items: center;
     background: rgb(101,100,100);
     background: linear-gradient(0deg, rgba(78,78,78,0.8631827731092436) 10%, rgba(34,34,34,1) 100%);
     color: white;
     font-size: 18px;
     height: 70px;
+}
+
+h5 {
+    margin: 1em;
 }
 
 .pokedexLinkDiv {

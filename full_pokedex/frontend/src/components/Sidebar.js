@@ -54,13 +54,13 @@ const Sidebar = () => {
         {
           user ?
           <div className="logoutDiv">
-            <div onClick={ logoutUser }>
+            <h5 onClick={ logoutUser }>
               Logout
-            </div>
+            </h5>
           </div>
           :
           <div className="logoutDiv">
-            <Link to='/login' className='pad-btn'><h6>Log In | Sign Up</h6></Link>
+            <Link to='/login' className='pad-btn'><h5>Log In | Sign Up</h5></Link>
           </div>
         }
       </div>
