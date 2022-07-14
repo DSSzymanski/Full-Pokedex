@@ -9,6 +9,7 @@ Clone the repository to your computer. You will need `node`, `npm`, and `python`
 
 ### Installation:
 #### Npm:
+Navigate to `full_pokedex/frontend` and install npm with:
 `npm install`
 
 #### Django
@@ -32,7 +33,13 @@ And Django Cors Headers:
 `python -m pip install django-cors-headers` [CORS Headers Documentation](https://pypi.org/project/django-cors-headers/)
 
 ### Running:
-This project is ran completely through Django. To run the project, navigate to where the project was cloned and from there into the Full_Pokedex folder.
+This project is ran completely through Django. First the project has to be built. Navigate to `full_pokedex/frontend` and in the console run:
+
+`npm run build`
+
+to generate the build.
+
+To run the project, navigate to where the project was cloned and from there into the Full_Pokedex folder.
 Once in this folder (where manage.py should be stored) run:
 `python manage.py runserver`.
 
@@ -45,7 +52,7 @@ To perform any updates to the Pokemon database, create a super user account by n
 
 `python manage.py createsuperuser`
 
-and follow the prompts to create an account. Once the account is created, open your web browser and go to `127.0.0.1:8000/admin` and sign in using the credentials used to make your super user account.
+and follow the prompts to create an account. Once the account is created, open your web browser and go to `127.0.0.1:8000/admin` and sign in using the credentials used to make your super user account. ***NOTE: A super user account will not have records. To create an account with records, click the 3 dashes to open the sidebar and click 'Log In | Sign Up'.***
 
 Once signed in, go to Pokemons under Pokedex_API and click either add or change. Going into change allows you to update the current types of a Pokemon that can be encountered, (ie add shadow or mega forms).
 
